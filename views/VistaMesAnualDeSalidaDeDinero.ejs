@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="css/TablaMesAnualGenerico.css">
+        <link rel="stylesheet" href="css/styleMenu.css"> 
+        <title>CRUD MONGODB</title>
+        
+    </head>
+    <body>
+
+        <h1 class="logo">CONTABILIDAD <span>MADRE</span></h1>
+        <div class="menuCelular">
+            <form method="link" action="/">
+                <input class="menuCel" type="submit" value="IR  A INGRESO DE INFORMACION">
+            </form>
+        </div>
+        
+        <div class="contenedorPadre scrol">
+           
+            <div class="item2 escrol">
+                <div class="mostrarInformacion ">
+                    <table id="tablaAlumnos" class="table mt-4 ">
+                                <thead>
+                                   <h4 class="correrIzquierda">VISTA MENSUAL DE USO DE DINERO </h4>
+                                </thead>
+                                <thead>
+                                        <tr class="tituloTabla">
+                                            <th>CONCEPTO</th>
+                                            <th>ENERO</th>
+                                            <th>FEBRERO</th>
+                                            <th>MARZO</th>
+                                            <th>ABRIL</th>
+                                            <th>MAYO</th>
+                                            <th>JUNIO</th>
+                                            <th>JULIO</th>
+                                            <th>AGOSTO</th>
+                                            <th>SEPTIEMBRE</th>
+                                            <th>OCTUBRE</th>
+                                            <th>NOVIEMBRE</th>
+                                            <th>DICIEMBRE</th>
+
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                <!-- BUSCADOR DE MES, ES USADO EN CADA CICLO DEL BUCLE SACANDO LA INFORMACION DE LA FECHA QUE DE EN CADA CICLO -->
+                                <% var busquedaMes   = 0;        %>
+                                
+                                <% var sumaPagoBancoEnero       = 0; %><% var sumaPagoBancoFebrero  = 0; %><% var sumaPagoBancoMarzo     = 0; %><% var sumaPagoBancoAbril     = 0; %>
+                                <% var sumaPagoBancoMayo        = 0; %><% var sumaPagoBancoJunio    = 0; %><% var sumaPagoBancoJulio     = 0; %><% var sumaPagoBancoAgosto    = 0; %>
+                                <% var sumaPagoBancoSeptiembre  = 0; %><% var sumaPagoBancoOctubre  = 0; %><% var sumaPagoBancoNoviembre = 0; %><% var sumaPagoBancoDiciembre = 0; %>
+
+                                <% var sumaPagoReciboEnero       = 0; %><% var sumaPagoReciboFebrero  = 0; %><% var sumaPagoReciboMarzo     = 0; %><% var sumaPagoReciboAbril     = 0; %>
+                                <% var sumaPagoReciboMayo        = 0; %><% var sumaPagoReciboJunio    = 0; %><% var sumaPagoReciboJulio     = 0; %><% var sumaPagoReciboAgosto    = 0; %>
+                                <% var sumaPagoReciboSeptiembre  = 0; %><% var sumaPagoReciboOctubre  = 0; %><% var sumaPagoReciboNoviembre = 0; %><% var sumaPagoReciboDiciembre = 0; %>
+
+                                <% var sumaComidaEnero       = 0; %><% var sumaComidaFebrero  = 0; %><% var sumaComidaMarzo     = 0; %><% var sumaComidaAbril     = 0; %>
+                                <% var sumaComidaMayo        = 0; %><% var sumaComidaJunio    = 0; %><% var sumaComidaJulio     = 0; %><% var sumaComidaAgosto    = 0; %>
+                                <% var sumaComidaSeptiembre  = 0; %><% var sumaComidaOctubre  = 0; %><% var sumaComidaNoviembre = 0; %><% var sumaComidaDiciembre = 0; %>
+
+                                <% var sumaFincaEnero       = 0; %><% var sumaFincaFebrero  = 0; %><% var sumaFincaMarzo     = 0; %><% var sumaFincaAbril     = 0; %>
+                                <% var sumaFincaMayo        = 0; %><% var sumaFincaJunio    = 0; %><% var sumaFincaJulio     = 0; %><% var sumaFincaAgosto    = 0; %>
+                                <% var sumaFincaSeptiembre  = 0; %><% var sumaFincaOctubre  = 0; %><% var sumaFincaNoviembre = 0; %><% var sumaFincaDiciembre = 0; %>
+
+                                <% var sumaOtrosEnero       = 0; %><% var sumaOtrosFebrero  = 0; %><% var sumaOtrosMarzo     = 0; %><% var sumaOtrosAbril     = 0; %>
+                                <% var sumaOtrosMayo        = 0; %><% var sumaOtrosJunio    = 0; %><% var sumaOtrosJulio     = 0; %><% var sumaOtrosAgosto    = 0; %>
+                                <% var sumaOtrosSeptiembre  = 0; %><% var sumaOtrosOctubre  = 0; %><% var sumaOtrosNoviembre = 0; %><% var sumaOtrosDiciembre = 0; %>
+
+                                    <% ingresos.forEach((ingreso) => { %>
+                                                                                                                              
+                                                 <% busquedaMes = ingreso.fechaDineroSalida[5] %>
+                                                 <% busquedaMes = "" + busquedaMes + ingreso.fechaDineroSalida[6] %> 
+
+                                            <% if(busquedaMes == "01"){
+
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoEnero = ingreso.dineroSalida + sumaPagoBancoEnero
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboEnero = ingreso.dineroSalida + sumaPagoReciboEnero
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaEnero = ingreso.dineroSalida + sumaComidaEnero
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaEnero = ingreso.dineroSalida + sumaFincaEnero
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosEnero = ingreso.dineroSalida + sumaOtrosEnero
+                                                }
+
+                                            } else if(busquedaMes == "02"){
+                                               
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoFebrero = ingreso.dineroSalida + sumaPagoBancoFebrero
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboFebrero = ingreso.dineroSalida + sumaPagoReciboFebrero
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaFebrero = ingreso.dineroSalida + sumaComidaFebrero
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaFebrero = ingreso.dineroSalida + sumaFincaFebrero
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosFebrero = ingreso.dineroSalida + sumaOtrosFebrero
+                                                }
+
+                                            } else if(busquedaMes == "03"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoMarzo = ingreso.dineroSalida + sumaPagoBancoMarzo
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboMarzo = ingreso.dineroSalida + sumaPagoReciboMarzo
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaMarzo = ingreso.dineroSalida + sumaComidaMarzo
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaMarzo = ingreso.dineroSalida + sumaFincaMarzo
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosMarzo = ingreso.dineroSalida + sumaOtrosMarzo
+                                                }
+
+                                            } else if(busquedaMes == "04"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoAbril = ingreso.dineroSalida + sumaPagoBancoAbril
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboAbril = ingreso.dineroSalida + sumaPagoReciboAbril
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaAbril = ingreso.dineroSalida + sumaComidaAbril
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaAbril = ingreso.dineroSalida + sumaFincaAbril
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosAbril = ingreso.dineroSalida + sumaOtrosAbril
+                                                }
+
+                                            } else if(busquedaMes == "05"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoMayo = ingreso.dineroSalida + sumaPagoBancoMayo
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboMayo = ingreso.dineroSalida + sumaPagoReciboMayo
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaMayo = ingreso.dineroSalida + sumaComidaMayo
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaMayo = ingreso.dineroSalida + sumaFincaMayo
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosMayo = ingreso.dineroSalida + sumaOtrosMayo
+                                                }
+
+                                            } else if(busquedaMes == "06"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoJunio = ingreso.dineroSalida + sumaPagoBancoJunio
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboJunio = ingreso.dineroSalida + sumaPagoReciboJunio
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaJunio = ingreso.dineroSalida + sumaComidaJunio
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaJunio = ingreso.dineroSalida + sumaFincaJunio
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosJunio = ingreso.dineroSalida + sumaOtrosJunio
+                                                }
+
+                                            } else if(busquedaMes == "07"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoJulio = ingreso.dineroSalida + sumaPagoBancoJulio
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboJulio = ingreso.dineroSalida + sumaPagoReciboJulio
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaJulio = ingreso.dineroSalida + sumaComidaJulio
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaJulio = ingreso.dineroSalida + sumaFincaJulio
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosJulio = ingreso.dineroSalida + sumaOtrosJulio
+                                                }
+
+                                            } else if(busquedaMes == "08"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoAgosto = ingreso.dineroSalida + sumaPagoBancoAgosto
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboAgosto = ingreso.dineroSalida + sumaPagoReciboAgosto
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaAgosto = ingreso.dineroSalida + sumaComidaAgosto
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaAgosto = ingreso.dineroSalida + sumaFincaAgosto
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosAgosto = ingreso.dineroSalida + sumaOtrosAgosto
+                                                }
+
+                                            } else if(busquedaMes == "09"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoSeptiembre = ingreso.dineroSalida + sumaPagoBancoSeptiembre
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboSeptiembre = ingreso.dineroSalida + sumaPagoReciboSeptiembre
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaSeptiembre = ingreso.dineroSalida + sumaComidaSeptiembre
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaSeptiembre = ingreso.dineroSalida + sumaFincaSeptiembre
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosSeptiembre = ingreso.dineroSalida + sumaOtrosSeptiembre
+                                                }
+
+                                            } else if(busquedaMes == "10"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoOctubre = ingreso.dineroSalida + sumaPagoBancoOctubre
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboOctubre = ingreso.dineroSalida + sumaPagoReciboOctubre
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaOctubre = ingreso.dineroSalida + sumaComidaOctubre
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaOctubre = ingreso.dineroSalida + sumaFincaOctubre
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosOctubre = ingreso.dineroSalida + sumaOtrosOctubre
+                                                }
+
+                                            } else if(busquedaMes == "11"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoNoviembre = ingreso.dineroSalida + sumaPagoBancoNoviembre
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboNoviembre = ingreso.dineroSalida + sumaPagoReciboNoviembre
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaNoviembre = ingreso.dineroSalida + sumaComidaNoviembre
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaNoviembre = ingreso.dineroSalida + sumaFincaNoviembre
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosNoviembre = ingreso.dineroSalida + sumaOtrosNoviembre
+                                                }
+
+                                            } else if(busquedaMes == "12"){
+                                                
+                                                if(ingreso.conceptoSalida == "pago banco"){
+                                                    sumaPagoBancoDiciembre = ingreso.dineroSalida + sumaPagoBancoDiciembre
+                                                } if(ingreso.conceptoSalida == "pago recibos"){
+                                                    sumaPagoReciboDiciembre = ingreso.dineroSalida + sumaPagoReciboDiciembre
+                                                } if(ingreso.conceptoSalida == "comida"){
+                                                    sumaComidaDiciembre = ingreso.dineroSalida + sumaComidaDiciembre
+                                                } if(ingreso.conceptoSalida == "finca"){
+                                                    sumaFincaDiciembre = ingreso.dineroSalida + sumaFincaDiciembre
+                                                } if(ingreso.conceptoSalida == "otros"){
+                                                    sumaOtrosDiciembre = ingreso.dineroSalida + sumaOtrosDiciembre
+                                                }
+
+                                            }
+                                            %>
+
+                                            
+                                    <% })%> 
+                                        <!--    -->
+                                            <tr class="color1">
+                                                <td>PAGO BANCO </td>
+                                                <td>$ <%= sumaPagoBancoEnero  %></td>
+                                                <td>$ <%= sumaPagoBancoFebrero  %></td>
+                                                <td>$ <%= sumaPagoBancoMarzo  %></td>
+                                                <td>$ <%= sumaPagoBancoAbril  %></td>
+                                                <td>$ <%= sumaPagoBancoMayo  %></td>
+                                                <td>$ <%= sumaPagoBancoJunio  %></td>
+                                                <td>$ <%= sumaPagoBancoJulio  %></td>
+                                                <td>$ <%= sumaPagoBancoAgosto  %></td>
+                                                <td>$ <%= sumaPagoBancoSeptiembre  %></td>
+                                                <td>$ <%= sumaPagoBancoOctubre  %></td>
+                                                <td>$ <%= sumaPagoBancoNoviembre  %></td>
+                                                <td>$ <%= sumaPagoBancoDiciembre  %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>PAGO RECIBOS </td>
+                                                <td>$ <%= sumaPagoReciboEnero  %></td>
+                                                <td>$ <%= sumaPagoReciboFebrero  %></td>
+                                                <td>$ <%= sumaPagoReciboMarzo  %></td>
+                                                <td>$ <%= sumaPagoReciboAbril  %></td>
+                                                <td>$ <%= sumaPagoReciboMayo  %></td>
+                                                <td>$ <%= sumaPagoReciboJunio  %></td>
+                                                <td>$ <%= sumaPagoReciboJulio  %></td>
+                                                <td>$ <%= sumaPagoReciboAgosto  %></td>
+                                                <td>$ <%= sumaPagoReciboSeptiembre  %></td>
+                                                <td>$ <%= sumaPagoReciboOctubre  %></td>
+                                                <td>$ <%= sumaPagoReciboNoviembre  %></td>
+                                                <td>$ <%= sumaPagoReciboDiciembre  %></td>
+                                            </tr>
+                                            <tr  class="color1">
+                                                <td>COMIDA </td>
+                                                <td>$ <%= sumaComidaEnero  %></td>
+                                                <td>$ <%= sumaComidaFebrero  %></td>
+                                                <td>$ <%= sumaComidaMarzo  %></td>
+                                                <td>$ <%= sumaComidaAbril  %></td>
+                                                <td>$ <%= sumaComidaMayo  %></td>
+                                                <td>$ <%= sumaComidaJunio  %></td>
+                                                <td>$ <%= sumaComidaJulio  %></td>
+                                                <td>$ <%= sumaComidaAgosto  %></td>
+                                                <td>$ <%= sumaComidaSeptiembre  %></td>
+                                                <td>$ <%= sumaComidaOctubre  %></td>
+                                                <td>$ <%= sumaComidaNoviembre  %></td>
+                                                <td>$ <%= sumaComidaDiciembre  %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>FINCA </td>
+                                                <td>$ <%= sumaFincaEnero  %></td>
+                                                <td>$ <%= sumaFincaFebrero  %></td>
+                                                <td>$ <%= sumaFincaMarzo  %></td>
+                                                <td>$ <%= sumaFincaAbril  %></td>
+                                                <td>$ <%= sumaFincaMayo  %></td>
+                                                <td>$ <%= sumaFincaJunio  %></td>
+                                                <td>$ <%= sumaFincaJulio  %></td>
+                                                <td>$ <%= sumaFincaAgosto  %></td>
+                                                <td>$ <%= sumaFincaSeptiembre  %></td>
+                                                <td>$ <%= sumaFincaOctubre  %></td>
+                                                <td>$ <%= sumaFincaNoviembre  %></td>
+                                                <td>$ <%= sumaFincaDiciembre  %></td>
+                                            </tr>
+                                            <tr  class="color1">
+                                                <td>OTROS </td>
+                                                <td>$ <%= sumaOtrosEnero  %></td>
+                                                <td>$ <%= sumaOtrosFebrero  %></td>
+                                                <td>$ <%= sumaOtrosMarzo  %></td>
+                                                <td>$ <%= sumaOtrosAbril  %></td>
+                                                <td>$ <%= sumaOtrosMayo  %></td>
+                                                <td>$ <%= sumaOtrosJunio  %></td>
+                                                <td>$ <%= sumaOtrosJulio  %></td>
+                                                <td>$ <%= sumaOtrosAgosto  %></td>
+                                                <td>$ <%= sumaOtrosSeptiembre  %></td>
+                                                <td>$ <%= sumaOtrosOctubre  %></td>
+                                                <td>$ <%= sumaOtrosNoviembre  %></td>
+                                                <td>$ <%= sumaOtrosDiciembre  %></td>
+                                            </tr>
+                                           
+                                    </tbody>
+                            </table>
+                            
+                            <table style="width: 100%;">
+                                <thead>
+                                    <h4 class="correrIzquierda">VISTA ANUAL DE USO DE DINERO </h4>
+                                 </thead>
+                                 <thead>
+                                         <tr class="tituloTabla">
+                                             <th>PAGO BANCO</th>
+                                             <th>PAGO RECIBO</th>
+                                             <th>COMIDA</th>
+                                             <th>FINCA</th>
+                                             <th>OTROS</th>
+                                         </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr >
+                                        <td  class="color1">$ <%= sumaPagoBancoEnero + sumaPagoBancoFebrero + sumaPagoBancoMarzo + sumaPagoBancoAbril +
+                                                  sumaPagoBancoMayo + sumaPagoBancoJunio +sumaPagoBancoJulio + sumaPagoBancoAgosto +
+                                        sumaPagoBancoSeptiembre +  sumaPagoBancoOctubre + sumaPagoBancoNoviembre +sumaPagoBancoDiciembre  %></td>
+                                    
+                                        <td>$ <%= sumaPagoReciboEnero + sumaPagoReciboFebrero + sumaPagoReciboMarzo + sumaPagoReciboAbril +
+                                                  sumaPagoReciboMayo + sumaPagoReciboJunio +sumaPagoReciboJulio + sumaPagoReciboAgosto +
+                                        sumaPagoReciboSeptiembre +  sumaPagoReciboOctubre + sumaPagoReciboNoviembre +sumaPagoReciboDiciembre  %></td>
+                                   
+                                        <td class="color1">$ <%= sumaComidaEnero + sumaComidaFebrero + sumaComidaMarzo + sumaComidaAbril +
+                                                  sumaComidaMayo + sumaComidaJunio +sumaComidaJulio + sumaComidaAgosto +
+                                        sumaComidaSeptiembre +  sumaComidaOctubre + sumaComidaNoviembre +sumaComidaDiciembre  %></td>
+                                    
+                                        <td>$ <%= sumaFincaEnero + sumaFincaFebrero + sumaFincaMarzo + sumaFincaAbril +
+                                                  sumaFincaMayo + sumaFincaJunio +sumaFincaJulio + sumaFincaAgosto +
+                                        sumaFincaSeptiembre +  sumaFincaOctubre + sumaFincaNoviembre +sumaFincaDiciembre  %></td>
+                                   
+                                        <td class="color1">$ <%= sumaOtrosEnero + sumaOtrosFebrero + sumaOtrosMarzo + sumaOtrosAbril +
+                                                  sumaOtrosMayo + sumaOtrosJunio +sumaOtrosJulio + sumaOtrosAgosto +
+                                        sumaOtrosSeptiembre +  sumaOtrosOctubre + sumaOtrosNoviembre +sumaOtrosDiciembre  %></td>
+                                    </tr>
+                                 </tbody>    
+
+                            </table>
+
+                    </div>      
+                    
+            </div>
+            
+            <div class="item3">
+                 <!-- para el menu lateral -->
+                <div class="navigation">
+                    <h4 class="titulo tituloMenu">MENU</h4>
+                    <ul>
+                        <div class="espacioTituloMenu">
+                        </div>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/">
+                            <span class="icon"></span>
+                        <span class="title "><h6>INGRE.</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarGananciasExternas">
+                            <span class="icon"></span>
+                            <span class="title"><h6>GAN EXTER</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list active">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarDinerosSalida">
+                            <span class="icon"></span>
+                            <span class="title"><h6>DINER SAL</h6></span>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="title"><h6>------------</h6></span>
+                        </li>
+                        <li  class="list active">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarMesAnoSalidaDinero">
+                            <span class="icon"></span>
+                            <span class="title"><h7>Vista Sal.</h7></span>
+                            </a>
+                        </li>
+                    </ul>
+                    </ul>
+                </div>
+                            
+                <div class="toggle">
+                </div>
+                
+            </div>
+        </div>
+
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="js/code.js"></script>
+        <script src="../index.js"></script>
+
+        
+    </body>
+</html>

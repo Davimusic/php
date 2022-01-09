@@ -1,0 +1,154 @@
+.navigation{
+    position: fixed;
+    top: 10%;
+    left: 0px;
+    bottom: 20px; 
+    width: 7%;
+    height: 80%;
+    border-radius: 10px;
+    box-sizing: initial;
+    border-left: 5px solid #3a56f3;
+    background: #8e8e91;
+    opacity: 0.9;
+    box-shadow: 0 0 20px 0 rgb(255, 255, 255);  
+    transition: width 0.5s ;
+    overflow-x: hidden;
+}
+
+.navigation:hover{
+    width: 15%;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+
+.navigation.active{
+    width: 300px;
+}
+
+
+.navigation ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top:40px;
+} 
+
+.navigation ul li{
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.navigation ul li.active{
+    background:rgb(10, 4, 104);
+} 
+
+.navigation ul li b:nth-child(1){
+    position: absolute;
+    top:-20px;
+    height: 20px;
+    width: 100%;
+    background: rgb(10, 4, 104);
+    display: none;
+}
+
+.navigation ul li b:nth-child(1)::before{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 20px;
+    background:  #8e8e91;
+}
+
+.navigation ul li b:nth-child(2){
+    position: absolute;
+    bottom:-20px;
+    height: 20px;
+    width: 100%;
+    background: rgb(10, 4, 104);
+    display: none;
+}
+
+.navigation ul li b:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 20px;
+    background: #8e8e91;
+}
+.navigation ul li.active b:nth-child(1),
+.navigation ul li.active b:nth-child(2){
+    display: block;
+}
+
+
+.navigation ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: #fff;
+} 
+
+.navigation ul li.active a{
+    color:black;
+}
+
+.navigation ul li a .title{
+    /*padding-top: 25%;*/
+    position: relative;
+    display: block;
+    padding-left: 5px;
+    height: 60px;
+    line-height: 60px;
+    white-space: normal;
+}
+
+.toggle{
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tituloMenu{
+    padding-left: 8%;
+    padding-top: 20%;
+}
+
+.espacioTituloMenu{
+    padding-top: 30%;
+}
+
+.primerMenu{
+    padding-top: 5px;
+}
+
+ 
+
+/* responsive */
+@media (max-width: 950px){
+ .navigation{
+    display: none;
+ }
+}
+
+/* ----------------------- */
+

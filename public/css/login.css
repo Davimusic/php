@@ -1,0 +1,83 @@
+.contenedorPadre{
+  padding-top: 5%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.cabeza{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+ }
+
+  .item2{
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-right: 1%;
+    width: 50%;
+    height:100%;
+  }
+
+.mostrarInformacion{
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    background: #8e8e91;
+    border-radius: 0.5em;
+    opacity: 0.95;
+    box-shadow: 0 0 20px 0 rgb(255, 255, 255);   
+}
+
+.select{
+  border: none;
+  background: none;
+  outline: 0;
+  color: #fff;
+  border-bottom: 1px solid #fafafa;  
+  width: 100%;
+}
+
+.espacio{
+  padding-bottom: 5%;
+}
+
+h4{
+  font-size: 0.5cm;
+}
+
+
+  *{
+    color:aliceblue;
+  }
+  
+  body{
+    background: -webkit-linear-gradient(to right,#3a56f3, #d3d4d6);
+    background: linear-gradient(to right,#3a56f3, #d3d4d6);
+  }
+
+/* estilos boton guardar*/
+
+.btn-guardar{
+    width: 100%;
+    padding: 15px;
+    background-color: rgb(10, 4, 104);
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: large;
+    color: azure;
+}
+
+.btn-guardar:hover, .btn-guardar:active{
+    color:aliceblue;
+    background-color: rgb(23, 0, 151);
+    border-color: rgb(117, 117, 173);
+}
+
+.btn-guardar:focus{
+    box-shadow: 0 0 0 3px rgba(121, 82, 179, 0.25);
+}
+

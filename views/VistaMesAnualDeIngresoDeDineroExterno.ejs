@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="css/TablaMesAnualGenerico.css">
+        <link rel="stylesheet" href="css/styleMenu.css"> 
+        <title>CRUD MONGODB</title>
+        
+    </head>
+    <body>
+
+        <h1 class="logo">CONTABILIDAD <span>MADRE</span></h1>
+        <div class="menuCelular">
+            <form method="link" action="/">
+                <input class="menuCel" type="submit" value="IR  A INGRESO DE INFORMACION">
+            </form>
+        </div>
+        
+        <div class="contenedorPadre scrol">
+           
+            <div class="item2 escrol">
+                <div class="mostrarInformacion scrol">
+                    <table id="tablaAlumnos" class="table mt-4 scrol">
+                                <thead>
+                                   <h4 class="correrIzquierda">VISTA MENSUAL DE INGRESOS DE DINEROS EXTERNOS </h4>
+                                </thead>
+                                <thead>
+                                        <tr class="tituloTabla">
+                                            <th>CONCEPTO</th>
+                                            <th>ENERO</th>
+                                            <th>FEBRERO</th>
+                                            <th>MARZO</th>
+                                            <th>ABRIL</th>
+                                            <th>MAYO</th>
+                                            <th>JUNIO</th>
+                                            <th>JULIO</th>
+                                            <th>AGOSTO</th>
+                                            <th>SEPTIEMBRE</th>
+                                            <th>OCTUBRE</th>
+                                            <th>NOVIEMBRE</th>
+                                            <th>DICIEMBRE</th>
+
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                <!-- BUSCADOR DE MES, ES USADO EN CADA CICLO DEL BUCLE SACANDO LA INFORMACION DE LA FECHA QUE DE EN CADA CICLO -->
+                                <% var busquedaMes   = 0;        %>
+                                
+                                <% var sumaDavidEnero       = 0; %><% var sumaDavidFebrero  = 0; %><% var sumaDavidMarzo     = 0; %><% var sumaDavidAbril     = 0; %>
+                                <% var sumaDavidMayo        = 0; %><% var sumaDavidJunio    = 0; %><% var sumaDavidJulio     = 0; %><% var sumaDavidAgosto    = 0; %>
+                                <% var sumaDavidSeptiembre  = 0; %><% var sumaDavidOctubre  = 0; %><% var sumaDavidNoviembre = 0; %><% var sumaDavidDiciembre = 0; %>
+
+                                <% var sumaMadreEnero       = 0; %><% var sumaMadreFebrero  = 0; %><% var sumaMadreMarzo     = 0; %><% var sumaMadreAbril     = 0; %>
+                                <% var sumaMadreMayo        = 0; %><% var sumaMadreJunio    = 0; %><% var sumaMadreJulio     = 0; %><% var sumaMadreAgosto    = 0; %>
+                                <% var sumaMadreSeptiembre  = 0; %><% var sumaMadreOctubre  = 0; %><% var sumaMadreNoviembre = 0; %><% var sumaMadreDiciembre = 0; %>
+                    
+
+                                    <% ingresos.forEach((ingreso) => { %>
+                                                                                                                              
+                                                 <% busquedaMes = ingreso.fechaDineroExterno[5] %>
+                                                 <% busquedaMes = "" + busquedaMes + ingreso.fechaDineroExterno[6] %> 
+
+                                            <% if(busquedaMes == "01"){
+
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidEnero = ingreso.dineroExterno + sumaDavidEnero
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreEnero = ingreso.dineroExterno + sumaMadreEnero
+                                                }
+
+                                            } else if(busquedaMes == "02"){
+                                               
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidFebrero = ingreso.dineroExterno + sumaDavidFebrero
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreFebrero = ingreso.dineroExterno + sumaMadreFebrero
+                                                }
+
+                                            } else if(busquedaMes == "03"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidMarzo= ingreso.dineroExterno + sumaDavidMarzo
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreMarzo= ingreso.dineroExterno + sumaMadreMarzo
+                                                }
+
+                                            } else if(busquedaMes == "04"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidAbril= ingreso.dineroExterno + sumaDavidAbril
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreAbril= ingreso.dineroExterno + sumaMadreAbril
+                                                }
+
+                                            } else if(busquedaMes == "05"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidMayo= ingreso.dineroExterno + sumaDavidMayo
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreMayo= ingreso.dineroExterno + sumaMadreMayo
+                                                }
+
+                                            } else if(busquedaMes == "06"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidJunio= ingreso.dineroExterno + sumaDavidJunio
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreJunio= ingreso.dineroExterno + sumaMadreJunio
+                                                }
+
+                                            } else if(busquedaMes == "07"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidJulio= ingreso.dineroExterno + sumaDavidJulio
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreJulio= ingreso.dineroExterno + sumaMadreJulio
+                                                }
+
+                                            } else if(busquedaMes == "08"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidAgosto= ingreso.dineroExterno + sumaDavidAgosto
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreAgosto= ingreso.dineroExterno + sumaMadreAgosto
+                                                }
+
+                                            } else if(busquedaMes == "09"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidSeptiembre= ingreso.dineroExterno + sumaDavidSeptiembre
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreSeptiembre= ingreso.dineroExterno + sumaMadreSeptiembre
+                                                }
+
+                                            } else if(busquedaMes == "10"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidOctubre= ingreso.dineroExterno + sumaDavidOctubre
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreOctubre= ingreso.dineroExterno + sumaMadreOctubre
+                                                }
+
+                                            } else if(busquedaMes == "11"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidNoviembre= ingreso.dineroExterno + sumaDavidNoviembre
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreNoviembre= ingreso.dineroExterno + sumaMadreNoviembre
+                                                }
+
+                                            } else if(busquedaMes == "12"){
+                                                
+                                                if(ingreso.nombre == "German David Fajardo"){
+                                                    sumaDavidDiciembre= ingreso.dineroExterno + sumaDavidDiciembre
+                                                }if(ingreso.nombre == "Margarita Fajardo"){
+                                                    sumaMadreDiciembre= ingreso.dineroExterno + sumaMadreDiciembre
+                                                }
+
+                                            }
+                                            %>
+
+                                            
+                                    <% })%> 
+                                        <!--    -->
+                                            <tr class="color1">
+                                                <td>German David Fajardo <br> mensual </td>
+                                                <td>$ <%= sumaDavidEnero  %></td>
+                                                <td>$ <%= sumaDavidFebrero  %></td>
+                                                <td>$ <%= sumaDavidMarzo  %></td>
+                                                <td>$ <%= sumaDavidAbril  %></td>
+                                                <td>$ <%= sumaDavidMayo  %></td>
+                                                <td>$ <%= sumaDavidJunio  %></td>
+                                                <td>$ <%= sumaDavidJulio  %></td>
+                                                <td>$ <%= sumaDavidAgosto  %></td>
+                                                <td>$ <%= sumaDavidSeptiembre  %></td>
+                                                <td>$ <%= sumaDavidOctubre  %></td>
+                                                <td>$ <%= sumaDavidNoviembre  %></td>
+                                                <td>$ <%= sumaDavidDiciembre  %></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>Margarita Fajardo <br> mensual </td>
+                                                <td>$ <%= sumaMadreEnero  %></td>
+                                                <td>$ <%= sumaMadreFebrero  %></td>
+                                                <td>$ <%= sumaMadreMarzo  %></td>
+                                                <td>$ <%= sumaMadreAbril  %></td>
+                                                <td>$ <%= sumaMadreMayo  %></td>
+                                                <td>$ <%= sumaMadreJunio  %></td>
+                                                <td>$ <%= sumaMadreJulio  %></td>
+                                                <td>$ <%= sumaMadreAgosto  %></td>
+                                                <td>$ <%= sumaMadreSeptiembre  %></td>
+                                                <td>$ <%= sumaMadreOctubre  %></td>
+                                                <td>$ <%= sumaMadreNoviembre  %></td>
+                                                <td>$ <%= sumaMadreDiciembre  %></td>
+                                            </tr>
+                                            
+                                            <% var sumaDavid     = 0;       %>
+                                            <% var sumaMargarita = 0;        %>
+                                            
+                                            <% ingresos.forEach((ingreso) => { %>
+                                                    <% if(ingreso.nombre == "German David Fajardo"){
+                                                        sumaDavid = ingreso.dineroExterno + sumaDavid
+                                                    } %>
+                                                    <% if(ingreso.nombre == "Margarita Fajardo"){
+                                                        sumaMargarita = ingreso.dineroExterno + sumaMargarita
+                                                    } %>
+                                                   
+                                            <% })%> 
+
+                                            <table style="width: 100%;">
+                                                <thead>
+                                                    <h4 class="correrIzquierda">VISTA ANUAL DE INGRESOS DE DINEROS EXTERNOS </h4>
+                                                </thead>
+                                                <thead class="tituloTabla">
+                                                    <td>GERMAN DAVID FAJARDO </td>
+                                                    <td>MARGARITA FAJARDO  </td>
+                                                </thead>
+                                                <tbody>
+                                                    <tr >
+                                                        <td class="color1">$ <%= sumaDavid  %></td>
+                                                        <td>$ <%= sumaMargarita  %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                                    
+                                                               
+                                          
+                                </tbody>
+                            </table>
+
+                    </div>      
+                    
+            </div>
+            
+            <div class="item3">
+                 <!-- para el menu lateral -->
+                <div class="navigation">
+                    <h4 class="titulo tituloMenu">MENU</h4>
+                    <ul>
+                        <div class="espacioTituloMenu">
+                        </div>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/">
+                            <span class="icon"></span>
+                        <span class="title "><h6>INGRE.</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list active">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarGananciasExternas">
+                            <span class="icon"></span>
+                            <span class="title"><h6>GAN EXTER</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarDinerosSalida">
+                            <span class="icon"></span>
+                            <span class="title"><h6>DINER SAL</h6></span>
+                            </a>
+                        </li>
+                        <li>
+                            <span class="title"><h6>------------</h6></span>
+                        </li>
+                        <li  class="list active">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarVistaMenAnulIngresosExternos">
+                            <span class="icon"></span>
+                            <span class="title"><h7>VISTA *</h7></span>
+                            </a>
+                        </li> 
+                    </ul>
+                    </ul>
+                </div>
+            
+                <div class="toggle">
+                </div>
+                
+            </div>
+        </div>
+
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="js/code.js"></script>
+        <script src="../index.js"></script>
+
+        
+    </body>
+</html>

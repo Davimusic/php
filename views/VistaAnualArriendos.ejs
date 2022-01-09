@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="css/VistaAnualesArriendos.css">
+        <link rel="stylesheet" href="css/styleMenu.css"> 
+        <title>CRUD MONGODB</title>
+        
+    </head>
+    <body>
+
+        <h1 class="logo">CONTABILIDAD <span>MADRE</span></h1>
+        <div class="menuCelular">
+            <form method="link" action="/">
+                <input class="menuCel" type="submit" value="IR  A INGRESO DE INFORMACION">
+            </form>
+        </div>
+        
+        <div class="contenedorPadre ">
+            <div class="item1 ">
+                <div class="mostrarInformacion ">
+                               
+                        <table id="tablaAlumnos" class="table mt-4 ">
+                          <h4>VISTA ANUAL DE INGRESOS POR SEPARADO</h4>
+                            <thead>
+                                    <tr class="tituloTabla">
+                                        <th style="display: none;">ID</th>     
+                                        <th>CONCEPTO</th> 
+                                        <th>DINERO</th>                       
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                <% var sumaArriendos = 0;        %>
+                                <% var sumaCosina    = 0;        %>
+                                <% var sumaLavadora  = 0;        %>
+                                <% var sumaOtro      = 0;        %>
+                                <% ingresos.forEach((ingreso) => { %>
+                                        <% if(ingreso.concepto == "arriendo"){
+                                            sumaArriendos = ingreso.dineroEntrante + sumaArriendos
+                                        } %>
+                                        <% if(ingreso.concepto == "cosina"){
+                                            sumaCosina = ingreso.dineroEntrante + sumaCosina
+                                        } %>
+                                        <% if(ingreso.concepto == "lavadora"){
+                                            sumaLavadora = ingreso.dineroEntrante + sumaLavadora
+                                        } %>
+                                        <% if(ingreso.concepto == "otro"){
+                                            sumaOtro = ingreso.dineroEntrante + sumaOtro
+                                        } %>
+                                <% })%> 
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>arriendos </td>
+                                            <td>$ <%= sumaArriendos  %></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>cosina </td>
+                                            <td>$ <%= sumaCosina  %></td>
+                                        </tr>
+                                      
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>lavadora </td>
+                                            <td>$ <%= sumaLavadora  %></td>
+                                        </tr>
+                                      
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>otro </td>
+                                            <td>$ <%= sumaOtro  %></td>
+                                        </tr>
+
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Todo junto </td>
+                                            <td>$ <%= sumaArriendos + sumaCosina + sumaLavadora + sumaOtro  %></td>
+                                        </tr>
+                                      
+                                      
+                            </tbody>
+                        </table>  
+                        
+
+                    </div>      
+                    
+            </div>
+            <div class="item2 ">
+                <div class="mostrarInformacion ">
+                               
+                        <table id="tablaAlumnos" class="table mt-4 ">
+                            <h4>VISTA ANUAL DE ARRIENDOS Y CONCEPTOS  DE LA KR 19</h4>
+                            <thead>
+                                    <tr class="tituloTabla">
+                                        <th style="display: none;">ID</th>     
+                                        <th>UBICACIÓN</th> 
+                                        <th>DINERO</th>                       
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                <% var sumakr19garaje = 0;    %>
+                                <% var sumakr19p1p1 = 0;        %>
+                                <% var sumakr19p1p2 = 0;        %>
+                                <% var sumakr19p1p3 = 0;        %>
+                                <% var sumakr19p1p4 = 0;        %>
+                                <% var sumakr19p1p5 = 0;        %>
+                                <% var sumakr19p1p6 = 0;        %>
+                                <% var sumakr19p2p1 = 0;        %>
+                                <% var sumakr19p2p2 = 0;        %>
+                                <% var sumakr19p2p3 = 0;        %>
+                                <% var sumakr19p3p1 = 0;        %>
+                                <% var sumakr19p3p2 = 0;        %>
+                                <% var sumakr19p3p3 = 0;        %>
+                                <% var sumakr19p3p4 = 0;        %>
+
+                                                              
+                                <% ingresos.forEach((ingreso) => { %>
+                                            <!--  kr19  piso 1   --> 
+
+                                        <% if(ingreso.direccion == "kr19garaje"){
+                                            sumakr19garaje = ingreso.dineroEntrante + sumakr19garaje
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p1"){
+                                            sumakr19p1p1 = ingreso.dineroEntrante + sumakr19p1p1
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p2"){
+                                            sumakr19p1p2 = ingreso.dineroEntrante + sumakr19p1p2
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p3"){
+                                            sumakr19p1p3 = ingreso.dineroEntrante + sumakr19p1p3
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p4"){
+                                            sumakr19p1p4 = ingreso.dineroEntrante + sumakr19p1p4
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p5"){
+                                            sumakr19p1p5 = ingreso.dineroEntrante + sumakr19p1p5
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p1p6"){
+                                            sumakr19p1p6 = ingreso.dineroEntrante + sumakr19p1p6
+                                        } %>
+                                        <!--  kr19  piso 2   -->
+                                        <% if(ingreso.direccion == "kr19p2p1"){
+                                            sumakr19p2p1 = ingreso.dineroEntrante + sumakr19p2p1
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p2p2"){
+                                            sumakr19p2p2 = ingreso.dineroEntrante + sumakr19p2p2
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p2p3"){
+                                            sumakr19p2p3 = ingreso.dineroEntrante + sumakr19p2p3
+                                        } %>
+                                        <!--  kr19  piso 3   -->
+                                        <% if(ingreso.direccion == "kr19p3p1"){
+                                            sumakr19p3p1 = ingreso.dineroEntrante + sumakr19p3p1
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p3p2"){
+                                            sumakr19p3p2 = ingreso.dineroEntrante + sumakr19p3p2
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p3p3"){
+                                            sumakr19p3p3 = ingreso.dineroEntrante + sumakr19p3p3
+                                        } %>
+                                        <% if(ingreso.direccion == "kr19p3p4"){
+                                            sumakr19p3p4 = ingreso.dineroEntrante + sumakr19p3p4
+                                        } %>
+                                       
+                                <% })%> 
+                                        <!--  kr19  piso 1   -->
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 garaje </td>
+                                            <td>$ <%= sumakr19garaje  %></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p1 </td>
+                                            <td>$ <%= sumakr19p1p1  %></td>
+                                        </tr>
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p2 </td>
+                                            <td>$ <%= sumakr19p1p2  %></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p3 </td>
+                                            <td>$ <%= sumakr19p1p3  %></td>
+                                        </tr>
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p4 </td>
+                                            <td>$ <%= sumakr19p1p4  %></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p5 </td>
+                                            <td>$ <%= sumakr19p1p5  %></td>
+                                        </tr>
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p1p6 </td>
+                                            <td>$ <%= sumakr19p1p6  %></td>
+                                        </tr>
+                                        <!--  kr19  piso 2   -->
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p2p1 </td>
+                                            <td>$ <%= sumakr19p2p1  %></td>
+                                        </tr>
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p2p2 </td>
+                                            <td>$ <%= sumakr19p2p2  %></td>
+                                        </tr>
+                                        <tr >
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p2p3 </td>
+                                            <td>$ <%= sumakr19p2p3  %></td>
+                                        </tr>
+                                        <!--  kr19  piso 3   -->
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p3p1 </td>
+                                            <td>$ <%= sumakr19p3p1  %></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p3p2 </td>
+                                            <td>$ <%= sumakr19p3p2  %></td>
+                                        </tr>
+                                        <tr  class="color1">
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p3p3 </td>
+                                            <td>$ <%= sumakr19p3p3  %></td>
+                                        </tr>
+                                        <tr >
+                                            <td style="display: none;"></td>
+                                            <td>Kr19 p3p4 </td>
+                                            <td>$ <%= sumakr19p3p4  %></td>
+                                        </tr>
+                                        
+                            </tbody>
+                        </table>  
+                        
+
+                    </div>      
+                    
+            </div>
+            <div class="item4 ">
+                <div class="mostrarInformacion ">
+                               
+                    <table id="tablaAlumnos" class="table mt-4 ">
+                        <h4>VISTA ANUAL DE ARRIENDOS Y CONCEPTOS  DE LA KR 21</h4>
+                        <thead>
+                                <tr class="tituloTabla">
+                                    <th style="display: none;">ID</th>     
+                                    <th>UBICACIÓN</th> 
+                                    <th>DINERO</th>                       
+                                </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <% var sumakr21g2 = 0;        %>
+                            <% var sumakr21g3 = 0;        %>
+                            <% var sumakr21apartaestudio = 0; %>
+                            <% var sumakr21p2p1 = 0;      %>
+                            <% var sumakr21p2p2 = 0;      %>
+                            <% var sumakr21p2p3 = 0;      %>
+                            <% var sumakr21p2p4 = 0;      %>
+                            <% var sumakr21p3p1 = 0;      %>
+                            <% var sumakr21p3p2 = 0;      %>
+                            <% var sumakr21p3p3 = 0;      %>
+                            <% var sumakr21p3p4 = 0;      %>
+                            <% var sumakr21p3p5 = 0;      %>
+                            <% var sumakr21p4p1 = 0;      %>
+                            <% var sumakr21p4p2 = 0;      %>
+                            <% var sumakr21p4p3 = 0;      %>
+                            <% var sumakr21p4p4 = 0;      %>
+                            <% var sumakr21p4p5 = 0;      %>
+                            <% var sumakr21p5p1 = 0;      %>
+                            <% var sumakr21p5p2 = 0;      %>
+                            <% var sumakr21p5p3 = 0;      %>
+                            <% var sumakr21p5p4 = 0;      %>
+                            <% var sumakr21p5p5 = 0;      %>
+
+                            
+                            <% ingresos.forEach((ingreso) => { %>
+                                    
+                                    <!--  kr21  piso 1   -->
+                                    <% if(ingreso.direccion == "kr21g2"){
+                                        sumakr21g2 = ingreso.dineroEntrante + sumakr21g2
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21g3"){
+                                        sumakr21g3 = ingreso.dineroEntrante + sumakr21g3
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21apartaestudio"){
+                                        sumakr21apartaestudio = ingreso.dineroEntrante + sumakr21apartaestudio
+                                    } %>
+                                    <!--  kr21  piso 2   -->
+                                    <% if(ingreso.direccion == "kr21p2p1"){
+                                        sumakr21p2p1 = ingreso.dineroEntrante + sumakr21p2p1
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p2p2"){
+                                        sumakr21p2p2 = ingreso.dineroEntrante + sumakr21p2p2
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p2p3"){
+                                        sumakr21p2p3 = ingreso.dineroEntrante + sumakr21p2p3
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p2p4"){
+                                        sumakr21p2p4 = ingreso.dineroEntrante + sumakr21p2p4
+                                    } %>
+                                    <!--  kr21  piso 3   -->
+                                    <% if(ingreso.direccion == "kr21p3p1"){
+                                        sumakr21p3p1 = ingreso.dineroEntrante + sumakr21p3p1
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p3p2"){
+                                        sumakr21p3p2 = ingreso.dineroEntrante + sumakr21p3p2
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p3p3"){
+                                        sumakr21p3p3 = ingreso.dineroEntrante + sumakr21p3p3
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p3p4"){
+                                        sumakr21p3p4 = ingreso.dineroEntrante + sumakr21p3p4
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p3p5"){
+                                        sumakr21p3p5 = ingreso.dineroEntrante + sumakr21p3p5
+                                    } %>
+                                    <!--  kr21  piso 4   -->
+                                    <% if(ingreso.direccion == "kr21p4p1"){
+                                        sumakr21p4p1 = ingreso.dineroEntrante + sumakr21p4p1
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p4p2"){
+                                        sumakr21p4p2 = ingreso.dineroEntrante + sumakr21p4p2
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p4p3"){
+                                        sumakr21p4p3 = ingreso.dineroEntrante + sumakr21p4p3
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p4p4"){
+                                        sumakr21p4p4 = ingreso.dineroEntrante + sumakr21p4p4
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p4p5"){
+                                        sumakr21p4p5 = ingreso.dineroEntrante + sumakr21p4p5
+                                    } %>
+                                    <!--  kr21  piso 5   -->
+                                    <% if(ingreso.direccion == "kr21p5p1"){
+                                        sumakr21p5p1 = ingreso.dineroEntrante + sumakr21p5p1
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p5p2"){
+                                        sumakr21p5p2 = ingreso.dineroEntrante + sumakr21p5p2
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p5p3"){
+                                        sumakr21p5p3 = ingreso.dineroEntrante + sumakr21p5p3
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p5p4"){
+                                        sumakr21p5p4 = ingreso.dineroEntrante + sumakr21p5p4
+                                    } %>
+                                    <% if(ingreso.direccion == "kr21p5p5"){
+                                        sumakr21p5p5 = ingreso.dineroEntrante + sumakr21p5p5
+                                    } %>
+                            <% })%> 
+                                    
+                                     <!--  kr21  piso 1   -->
+                                     <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 g2 </td>
+                                        <td>$ <%= sumakr21g2  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 g3 </td>
+                                        <td>$ <%= sumakr21g3  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 apartaestudio </td>
+                                        <td>$ <%= sumakr21apartaestudio  %></td>
+                                    </tr>
+                                    <!--  kr21  piso 2   -->
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p2p1 </td>
+                                        <td>$ <%= sumakr21p2p1  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p2p2 </td>
+                                        <td>$ <%= sumakr21p2p2  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p2p3 </td>
+                                        <td>$ <%= sumakr21p2p3  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p2p4 </td>
+                                        <td>$ <%= sumakr21p2p4  %></td>
+                                    </tr>
+                                    <!--  kr21  piso 3   -->
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p3p1 </td>
+                                        <td>$ <%= sumakr21p3p1  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p3p2 </td>
+                                        <td>$ <%= sumakr21p3p2  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p3p3 </td>
+                                        <td>$ <%= sumakr21p3p3  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p3p4 </td>
+                                        <td>$ <%= sumakr21p3p4  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p3p5 </td>
+                                        <td>$ <%= sumakr21p3p5  %></td>
+                                    </tr>
+                                     <!--  kr21  piso 4   -->
+                                     <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p4p1 </td>
+                                        <td>$ <%= sumakr21p4p1  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p4p2 </td>
+                                        <td>$ <%= sumakr21p4p2  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p4p3 </td>
+                                        <td>$ <%= sumakr21p4p3  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p4p4 </td>
+                                        <td>$ <%= sumakr21p4p4  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p4p5 </td>
+                                        <td>$ <%= sumakr21p4p5  %></td>
+                                    </tr>
+                                    <!--  kr21  piso 5   -->
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p5p1 </td>
+                                        <td>$ <%= sumakr21p5p1  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p5p2 </td>
+                                        <td>$ <%= sumakr21p5p2  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p5p3 </td>
+                                        <td>$ <%= sumakr21p5p3  %></td>
+                                    </tr>
+                                    <tr  class="color1">
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p5p4 </td>
+                                        <td>$ <%= sumakr21p5p4  %></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="display: none;"></td>
+                                        <td>Kr21 p5p5 </td>
+                                        <td>$ <%= sumakr21p5p5  %></td>
+                                    </tr>
+                        </tbody>
+                    </table>  
+                    
+
+                </div>  
+
+            </div>
+            <div class="item3">
+                 <!-- para el menu lateral -->
+                <div class="navigation">
+                    <h4 class="titulo tituloMenu">MENU</h4>
+                    <ul>
+                        <div class="espacioTituloMenu">
+                        </div>
+                        <li  class="list active">
+                            <b></b>
+                            <b></b>
+                            <a href="/">
+                            <span class="icon"></span>
+                        <span class="title "><h6>INGRE.</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarGananciasExternas">
+                            <span class="icon"></span>
+                            <span class="title"><h6>GAN EXTER</h6></span>
+                            </a>
+                        </li>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/mostrarDinerosSalida">
+                            <span class="icon"></span>
+                            <span class="title"><h6>DINER SAL</h6></span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <span class="title"><h6>------------</h6></span>
+                        </li>
+                        <li  class="list active ">
+                            <b></b>
+                            <b></b>
+                            <a href="/promedios">
+                            <span class="icon"></span>
+                            <span class="title"><h7>PROME</h7></span>
+                            </a>
+                        </li>
+                        <li  class="list">
+                            <b></b>
+                            <b></b>
+                            <a href="/vistaMensual">
+                            <span class="icon"></span>
+                            <span class="title"><h7>VISTA MEN</h7></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            
+                <div class="toggle">
+                </div>
+                
+            </div>
+        </div>
+
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="js/code.js"></script>
+        <script src="../index.js"></script>
+
+        
+    </body>
+</html>

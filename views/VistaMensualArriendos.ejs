@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="css/VistaMensualArriendos.css">
+        <link rel="stylesheet" href="css/styleMenu.css"> 
+        <title>CRUD MONGODB</title>
+        
+    </head>
+    <body>
+
+        <h1 class="logo">CONTABILIDAD <span>MADRE</span></h1>
+
+        <div class="menuCelular">
+            <form method="link" action="/promedios">
+                <input class="menuCel" type="submit" value="IR  A PROMEDIOS">
+            </form>
+        </div>
+        
+        <div class="contenedorPadre ">
+            
+            <div class="item2 ">
+                <div class="mostrarInformacion ">
+                    <h4>VISTA MENSUAL DE INGRESOS POR CONCEPTOS</h4>
+                    <table id="tablaAlumnos" class="table mt-4 ">
+                                <thead>
+                                        <tr class="tituloTabla">
+                                            <th>CONCEPTO</th>
+                                            <th>ENERO</th>
+                                            <th>FEBRERO</th>
+                                            <th>MARZO</th>
+                                            <th>ABRIL</th>
+                                            <th>MAYO</th>
+                                            <th>JUNIO</th>
+                                            <th>JULIO</th>
+                                            <th>AGOSTO</th>
+                                            <th>SEPTIEMBRE</th>
+                                            <th>OCTUBRE</th>
+                                            <th>NOVIEMBRE</th>
+                                            <th>DICIEMBRE</th>
+
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                <!-- BUSCADOR DE MES, ES USADO EN CADA CICLO DEL BUCLE SACANDO LA INFORMACION DE LA FECHA QUE DE EN CADA CICLO -->
+                                <% var busquedaMes   = 0;        %>
+                                
+                                <!-- DE CONCEPTOS -->
+                                <% var sumaArriendoEnero     = 0;      %><% var sumaArriendoFebrero  = 0;      %><% var sumaArriendoMarzo      = 0;      %>
+                                <% var sumaArriendoAbril     = 0;      %><% var sumaArriendoMayo     = 0;      %><% var sumaArriendoJunio      = 0;      %>
+                                <% var sumaArriendoJulio     = 0;      %><% var sumaArriendoAgosto   = 0;      %><% var sumaArriendoSeptiembre = 0;      %>
+                                <% var sumaArriendoOctubre   = 0;      %><% var sumaArriendoNoviembre= 0;      %><% var sumaArriendoDiciembre  = 0;      %>
+
+                                <% var sumaCosinaEnero     = 0;      %><% var sumaCosinaFebrero  = 0;      %><% var sumaCosinaMarzo      = 0;      %>
+                                <% var sumaCosinaAbril     = 0;      %><% var sumaCosinaMayo     = 0;      %><% var sumaCosinaJunio      = 0;      %>
+                                <% var sumaCosinaJulio     = 0;      %><% var sumaCosinaAgosto   = 0;      %><% var sumaCosinaSeptiembre = 0;      %>
+                                <% var sumaCosinaOctubre   = 0;      %><% var sumaCosinaNoviembre= 0;      %><% var sumaCosinaDiciembre  = 0;      %>
+
+                                <% var sumaLavadoraEnero     = 0;      %><% var sumaLavadoraFebrero  = 0;      %><% var sumaLavadoraMarzo      = 0;      %>
+                                <% var sumaLavadoraAbril     = 0;      %><% var sumaLavadoraMayo     = 0;      %><% var sumaLavadoraJunio      = 0;      %>
+                                <% var sumaLavadoraJulio     = 0;      %><% var sumaLavadoraAgosto   = 0;      %><% var sumaLavadoraSeptiembre = 0;      %>
+                                <% var sumaLavadoraOctubre   = 0;      %><% var sumaLavadoraNoviembre= 0;      %><% var sumaLavadoraDiciembre  = 0;      %>
+
+                                <% var sumaOtroEnero     = 0;      %><% var sumaOtroFebrero  = 0;      %><% var sumaOtroMarzo      = 0;      %>
+                                <% var sumaOtroAbril     = 0;      %><% var sumaOtroMayo     = 0;      %><% var sumaOtroJunio      = 0;      %>
+                                <% var sumaOtroJulio     = 0;      %><% var sumaOtroAgosto   = 0;      %><% var sumaOtroSeptiembre = 0;      %>
+                                <% var sumaOtroOctubre   = 0;      %><% var sumaOtroNoviembre= 0;      %><% var sumaOtroDiciembre  = 0;      %>
+
+                    <!--  DE DIRECCIONES DE LA KR 19 -->
+                    <% var sumaKr19garajeEnero = 0; %>  <% var sumaKr19p1p1Enero = 0; %> <% var sumaKr19p1p2Enero = 0; %> <% var sumaKr19p1p3Enero   = 0;      %>
+                    <% var sumaKr19p1p4Enero   = 0; %>  <% var sumaKr19p1p5Enero = 0; %> <% var sumaKr19p1p6Enero = 0; %> <% var sumaKr19p2p1Enero   = 0;      %>
+                    <% var sumaKr19p2p2Enero   = 0; %>  <% var sumaKr19p2p3Enero = 0; %> <% var sumaKr19p3p1Enero = 0; %> <% var sumaKr19p3p2Enero   = 0;      %>
+                    <% var sumaKr19p3p3Enero   = 0; %>  <% var sumaKr19p3p4Enero = 0; %> 
+
+                    <% var sumaKr19garajeFebrero = 0; %>  <% var sumaKr19p1p1Febrero = 0; %> <% var sumaKr19p1p2Febrero = 0; %> <% var sumaKr19p1p3Febrero   = 0;      %>
+                    <% var sumaKr19p1p4Febrero   = 0; %>  <% var sumaKr19p1p5Febrero = 0; %> <% var sumaKr19p1p6Febrero = 0; %> <% var sumaKr19p2p1Febrero   = 0;      %>
+                    <% var sumaKr19p2p2Febrero   = 0; %>  <% var sumaKr19p2p3Febrero = 0; %> <% var sumaKr19p3p1Febrero = 0; %> <% var sumaKr19p3p2Febrero   = 0;      %>
+                    <% var sumaKr19p3p3Febrero   = 0; %>  <% var sumaKr19p3p4Febrero = 0; %> 
+
+                    <% var sumaKr19garajeMarzo = 0; %>  <% var sumaKr19p1p1Marzo = 0; %> <% var sumaKr19p1p2Marzo = 0; %> <% var sumaKr19p1p3Marzo   = 0;      %>
+                    <% var sumaKr19p1p4Marzo   = 0; %>  <% var sumaKr19p1p5Marzo = 0; %> <% var sumaKr19p1p6Marzo = 0; %> <% var sumaKr19p2p1Marzo   = 0;      %>
+                    <% var sumaKr19p2p2Marzo   = 0; %>  <% var sumaKr19p2p3Marzo = 0; %> <% var sumaKr19p3p1Marzo = 0; %> <% var sumaKr19p3p2Marzo   = 0;      %>
+                    <% var sumaKr19p3p3Marzo   = 0; %>  <% var sumaKr19p3p4Marzo = 0; %> 
+
+                    <% var sumaKr19garajeAbril = 0; %>  <% var sumaKr19p1p1Abril = 0; %> <% var sumaKr19p1p2Abril = 0; %> <% var sumaKr19p1p3Abril   = 0;      %>
+                    <% var sumaKr19p1p4Abril   = 0; %>  <% var sumaKr19p1p5Abril = 0; %> <% var sumaKr19p1p6Abril = 0; %> <% var sumaKr19p2p1Abril   = 0;      %>
+                    <% var sumaKr19p2p2Abril   = 0; %>  <% var sumaKr19p2p3Abril = 0; %> <% var sumaKr19p3p1Abril = 0; %> <% var sumaKr19p3p2Abril   = 0;      %>
+                    <% var sumaKr19p3p3Abril   = 0; %>  <% var sumaKr19p3p4Abril = 0; %>
+                    
+                    <% var sumaKr19garajeMayo = 0; %>  <% var sumaKr19p1p1Mayo = 0; %> <% var sumaKr19p1p2Mayo = 0; %> <% var sumaKr19p1p3Mayo   = 0;      %>
+                    <% var sumaKr19p1p4Mayo   = 0; %>  <% var sumaKr19p1p5Mayo = 0; %> <% var sumaKr19p1p6Mayo = 0; %> <% var sumaKr19p2p1Mayo   = 0;      %>
+                    <% var sumaKr19p2p2Mayo   = 0; %>  <% var sumaKr19p2p3Mayo = 0; %> <% var sumaKr19p3p1Mayo = 0; %> <% var sumaKr19p3p2Mayo   = 0;      %>
+                    <% var sumaKr19p3p3Mayo   = 0; %>  <% var sumaKr19p3p4Mayo = 0; %> 
+
+                    <% var sumaKr19garajeJunio = 0; %>  <% var sumaKr19p1p1Junio = 0; %> <% var sumaKr19p1p2Junio = 0; %> <% var sumaKr19p1p3Junio   = 0;      %>
+                    <% var sumaKr19p1p4Junio   = 0; %>  <% var sumaKr19p1p5Junio = 0; %> <% var sumaKr19p1p6Junio = 0; %> <% var sumaKr19p2p1Junio   = 0;      %>
+                    <% var sumaKr19p2p2Junio   = 0; %>  <% var sumaKr19p2p3Junio = 0; %> <% var sumaKr19p3p1Junio = 0; %> <% var sumaKr19p3p2Junio   = 0;      %>
+                    <% var sumaKr19p3p3Junio   = 0; %>  <% var sumaKr19p3p4Junio = 0; %> 
+
+                    <% var sumaKr19garajeJulio = 0; %>  <% var sumaKr19p1p1Julio = 0; %> <% var sumaKr19p1p2Julio = 0; %> <% var sumaKr19p1p3Julio   = 0;      %>
+                    <% var sumaKr19p1p4Julio   = 0; %>  <% var sumaKr19p1p5Julio = 0; %> <% var sumaKr19p1p6Julio = 0; %> <% var sumaKr19p2p1Julio   = 0;      %>
+                    <% var sumaKr19p2p2Julio   = 0; %>  <% var sumaKr19p2p3Julio = 0; %> <% var sumaKr19p3p1Julio = 0; %> <% var sumaKr19p3p2Julio   = 0;      %>
+                    <% var sumaKr19p3p3Julio   = 0; %>  <% var sumaKr19p3p4Julio = 0; %> 
+
+                    <% var sumaKr19garajeAgosto = 0; %>  <% var sumaKr19p1p1Agosto = 0; %> <% var sumaKr19p1p2Agosto = 0; %> <% var sumaKr19p1p3Agosto   = 0;      %>
+                    <% var sumaKr19p1p4Agosto   = 0; %>  <% var sumaKr19p1p5Agosto = 0; %> <% var sumaKr19p1p6Agosto = 0; %> <% var sumaKr19p2p1Agosto   = 0;      %>
+                    <% var sumaKr19p2p2Agosto   = 0; %>  <% var sumaKr19p2p3Agosto = 0; %> <% var sumaKr19p3p1Agosto = 0; %> <% var sumaKr19p3p2Agosto   = 0;      %>
+                    <% var sumaKr19p3p3Agosto   = 0; %>  <% var sumaKr19p3p4Agosto = 0; %> 
+
+                    <% var sumaKr19garajeSeptiembre = 0; %>  <% var sumaKr19p1p1Septiembre = 0; %> <% var sumaKr19p1p2Septiembre = 0; %> <% var sumaKr19p1p3Septiembre   = 0;      %>
+                    <% var sumaKr19p1p4Septiembre   = 0; %>  <% var sumaKr19p1p5Septiembre = 0; %> <% var sumaKr19p1p6Septiembre = 0; %> <% var sumaKr19p2p1Septiembre   = 0;      %>
+                    <% var sumaKr19p2p2Septiembre   = 0; %>  <% var sumaKr19p2p3Septiembre = 0; %> <% var sumaKr19p3p1Septiembre = 0; %> <% var sumaKr19p3p2Septiembre   = 0;      %>
+                    <% var sumaKr19p3p3Septiembre   = 0; %>  <% var sumaKr19p3p4Septiembre = 0; %> 
+
+                    <% var sumaKr19garajeOctubre = 0; %>  <% var sumaKr19p1p1Octubre = 0; %> <% var sumaKr19p1p2Octubre = 0; %> <% var sumaKr19p1p3Octubre   = 0;      %>
+                    <% var sumaKr19p1p4Octubre   = 0; %>  <% var sumaKr19p1p5Octubre = 0; %> <% var sumaKr19p1p6Octubre = 0; %> <% var sumaKr19p2p1Octubre   = 0;      %>
+                    <% var sumaKr19p2p2Octubre   = 0; %>  <% var sumaKr19p2p3Octubre = 0; %> <% var sumaKr19p3p1Octubre = 0; %> <% var sumaKr19p3p2Octubre   = 0;      %>
+                    <% var sumaKr19p3p3Octubre   = 0; %>  <% var sumaKr19p3p4Octubre = 0; %> 
+
+                    <% var sumaKr19garajeNoviembre = 0; %>  <% var sumaKr19p1p1Noviembre = 0; %> <% var sumaKr19p1p2Noviembre = 0; %> <% var sumaKr19p1p3Noviembre   = 0;      %>
+                    <% var sumaKr19p1p4Noviembre   = 0; %>  <% var sumaKr19p1p5Noviembre = 0; %> <% var sumaKr19p1p6Noviembre = 0; %> <% var sumaKr19p2p1Noviembre   = 0;      %>
+                    <% var sumaKr19p2p2Noviembre   = 0; %>  <% var sumaKr19p2p3Noviembre = 0; %> <% var sumaKr19p3p1Noviembre = 0; %> <% var sumaKr19p3p2Noviembre   = 0;      %>
+                    <% var sumaKr19p3p3Noviembre   = 0; %>  <% var sumaKr19p3p4Noviembre = 0; %> 
+
+                    <% var sumaKr19garajeDiciembre = 0; %>  <% var sumaKr19p1p1Diciembre = 0; %> <% var sumaKr19p1p2Diciembre = 0; %> <% var sumaKr19p1p3Diciembre   = 0;      %>
+                    <% var sumaKr19p1p4Diciembre   = 0; %>  <% var sumaKr19p1p5Diciembre = 0; %> <% var sumaKr19p1p6Diciembre = 0; %> <% var sumaKr19p2p1Diciembre   = 0;      %>
+                    <% var sumaKr19p2p2Diciembre   = 0; %>  <% var sumaKr19p2p3Diciembre = 0; %> <% var sumaKr19p3p1Diciembre = 0; %> <% var sumaKr19p3p2Diciembre   = 0;      %>
+                    <% var sumaKr19p3p3Diciembre   = 0; %>  <% var sumaKr19p3p4Diciembre = 0; %>
+                    
+                    <!--  DE DIRECCIONES DE LA KR 21 -->
+                    <% var sumaKr21g2Enero     = 0; %> <% var sumaKr21g3Enero     = 0; %> <% var sumaKr21p2p1Enero   = 0; %> <% var sumaKr21p2p2Enero   = 0; %>
+                    <% var sumaKr21p2p3Enero   = 0; %> <% var sumaKr21p2p4Enero   = 0; %> <% var sumaKr21p3p1Enero   = 0; %> <% var sumaKr21p3p2Enero   = 0; %>
+                    <% var sumaKr21p3p3Enero   = 0; %> <% var sumaKr21p3p4Enero   = 0; %> <% var sumaKr21p3p5Enero   = 0; %> <% var sumaKr21p4p1Enero   = 0; %>
+                    <% var sumaKr21p4p2Enero   = 0; %> <% var sumaKr21p4p3Enero   = 0; %> <% var sumaKr21p4p4Enero   = 0; %> <% var sumaKr21p4p5Enero   = 0; %>
+                    <% var sumaKr21p5p1Enero   = 0; %> <% var sumaKr21p5p2Enero   = 0; %> <% var sumaKr21p5p3Enero   = 0; %> <% var sumaKr21p5p4Enero   = 0; %>
+                    <% var sumaKr21p5p5Enero   = 0; %> <% var sumaKr21apartaestudioEnero   = 0; %>
+
+                    <% var sumaKr21g2Febrero     = 0; %> <% var sumaKr21g3Febrero     = 0; %> <% var sumaKr21p2p1Febrero   = 0; %> <% var sumaKr21p2p2Febrero   = 0; %>
+                    <% var sumaKr21p2p3Febrero   = 0; %> <% var sumaKr21p2p4Febrero   = 0; %> <% var sumaKr21p3p1Febrero   = 0; %> <% var sumaKr21p3p2Febrero   = 0; %>
+                    <% var sumaKr21p3p3Febrero   = 0; %> <% var sumaKr21p3p4Febrero   = 0; %> <% var sumaKr21p3p5Febrero   = 0; %> <% var sumaKr21p4p1Febrero   = 0; %>
+                    <% var sumaKr21p4p2Febrero   = 0; %> <% var sumaKr21p4p3Febrero   = 0; %> <% var sumaKr21p4p4Febrero   = 0; %> <% var sumaKr21p4p5Febrero   = 0; %>
+                    <% var sumaKr21p5p1Febrero   = 0; %> <% var sumaKr21p5p2Febrero   = 0; %> <% var sumaKr21p5p3Febrero   = 0; %> <% var sumaKr21p5p4Febrero   = 0; %>
+                    <% var sumaKr21p5p5Febrero   = 0; %> <% var sumaKr21apartaestudioFebrero   = 0; %>
+
+                    <% var sumaKr21g2Marzo     = 0; %> <% var sumaKr21g3Marzo     = 0; %> <% var sumaKr21p2p1Marzo   = 0; %> <% var sumaKr21p2p2Marzo   = 0; %>
+                    <% var sumaKr21p2p3Marzo   = 0; %> <% var sumaKr21p2p4Marzo   = 0; %> <% var sumaKr21p3p1Marzo   = 0; %> <% var sumaKr21p3p2Marzo   = 0; %>
+                    <% var sumaKr21p3p3Marzo   = 0; %> <% var sumaKr21p3p4Marzo   = 0; %> <% var sumaKr21p3p5Marzo   = 0; %> <% var sumaKr21p4p1Marzo   = 0; %>
+                    <% var sumaKr21p4p2Marzo   = 0; %> <% var sumaKr21p4p3Marzo   = 0; %> <% var sumaKr21p4p4Marzo   = 0; %> <% var sumaKr21p4p5Marzo   = 0; %>
+                    <% var sumaKr21p5p1Marzo   = 0; %> <% var sumaKr21p5p2Marzo   = 0; %> <% var sumaKr21p5p3Marzo   = 0; %> <% var sumaKr21p5p4Marzo   = 0; %>
+                    <% var sumaKr21p5p5Marzo   = 0; %> <% var sumaKr21apartaestudioMarzo   = 0; %>
+
+                    <% var sumaKr21g2Abril     = 0; %> <% var sumaKr21g3Abril     = 0; %> <% var sumaKr21p2p1Abril   = 0; %> <% var sumaKr21p2p2Abril   = 0; %>
+                    <% var sumaKr21p2p3Abril   = 0; %> <% var sumaKr21p2p4Abril   = 0; %> <% var sumaKr21p3p1Abril   = 0; %> <% var sumaKr21p3p2Abril   = 0; %>
+                    <% var sumaKr21p3p3Abril   = 0; %> <% var sumaKr21p3p4Abril   = 0; %> <% var sumaKr21p3p5Abril   = 0; %> <% var sumaKr21p4p1Abril   = 0; %>
+                    <% var sumaKr21p4p2Abril   = 0; %> <% var sumaKr21p4p3Abril   = 0; %> <% var sumaKr21p4p4Abril   = 0; %> <% var sumaKr21p4p5Abril   = 0; %>
+                    <% var sumaKr21p5p1Abril   = 0; %> <% var sumaKr21p5p2Abril   = 0; %> <% var sumaKr21p5p3Abril   = 0; %> <% var sumaKr21p5p4Abril   = 0; %>
+                    <% var sumaKr21p5p5Abril   = 0; %> <% var sumaKr21apartaestudioAbril   = 0; %>
+
+                    <% var sumaKr21g2Mayo     = 0; %> <% var sumaKr21g3Mayo     = 0; %> <% var sumaKr21p2p1Mayo   = 0; %> <% var sumaKr21p2p2Mayo   = 0; %>
+                    <% var sumaKr21p2p3Mayo   = 0; %> <% var sumaKr21p2p4Mayo   = 0; %> <% var sumaKr21p3p1Mayo   = 0; %> <% var sumaKr21p3p2Mayo   = 0; %>
+                    <% var sumaKr21p3p3Mayo   = 0; %> <% var sumaKr21p3p4Mayo   = 0; %> <% var sumaKr21p3p5Mayo   = 0; %> <% var sumaKr21p4p1Mayo   = 0; %>
+                    <% var sumaKr21p4p2Mayo   = 0; %> <% var sumaKr21p4p3Mayo   = 0; %> <% var sumaKr21p4p4Mayo   = 0; %> <% var sumaKr21p4p5Mayo   = 0; %>
+                    <% var sumaKr21p5p1Mayo   = 0; %> <% var sumaKr21p5p2Mayo   = 0; %> <% var sumaKr21p5p3Mayo   = 0; %> <% var sumaKr21p5p4Mayo   = 0; %>
+                    <% var sumaKr21p5p5Mayo   = 0; %> <% var sumaKr21apartaestudioMayo   = 0; %>
+
+                    <% var sumaKr21g2Junio     = 0; %> <% var sumaKr21g3Junio     = 0; %> <% var sumaKr21p2p1Junio   = 0; %> <% var sumaKr21p2p2Junio   = 0; %>
+                    <% var sumaKr21p2p3Junio   = 0; %> <% var sumaKr21p2p4Junio   = 0; %> <% var sumaKr21p3p1Junio   = 0; %> <% var sumaKr21p3p2Junio   = 0; %>
+                    <% var sumaKr21p3p3Junio   = 0; %> <% var sumaKr21p3p4Junio   = 0; %> <% var sumaKr21p3p5Junio   = 0; %> <% var sumaKr21p4p1Junio   = 0; %>
+                    <% var sumaKr21p4p2Junio   = 0; %> <% var sumaKr21p4p3Junio   = 0; %> <% var sumaKr21p4p4Junio   = 0; %> <% var sumaKr21p4p5Junio   = 0; %>
+                    <% var sumaKr21p5p1Junio   = 0; %> <% var sumaKr21p5p2Junio   = 0; %> <% var sumaKr21p5p3Junio   = 0; %> <% var sumaKr21p5p4Junio   = 0; %>
+                    <% var sumaKr21p5p5Junio   = 0; %> <% var sumaKr21apartaestudioJunio   = 0; %>
+
+                    <% var sumaKr21g2Julio     = 0; %> <% var sumaKr21g3Julio     = 0; %> <% var sumaKr21p2p1Julio   = 0; %> <% var sumaKr21p2p2Julio   = 0; %>
+                    <% var sumaKr21p2p3Julio   = 0; %> <% var sumaKr21p2p4Julio   = 0; %> <% var sumaKr21p3p1Julio   = 0; %> <% var sumaKr21p3p2Julio   = 0; %>
+                    <% var sumaKr21p3p3Julio   = 0; %> <% var sumaKr21p3p4Julio   = 0; %> <% var sumaKr21p3p5Julio   = 0; %> <% var sumaKr21p4p1Julio   = 0; %>
+                    <% var sumaKr21p4p2Julio   = 0; %> <% var sumaKr21p4p3Julio   = 0; %> <% var sumaKr21p4p4Julio   = 0; %> <% var sumaKr21p4p5Julio   = 0; %>
+                    <% var sumaKr21p5p1Julio   = 0; %> <% var sumaKr21p5p2Julio   = 0; %> <% var sumaKr21p5p3Julio   = 0; %> <% var sumaKr21p5p4Julio   = 0; %>
+                    <% var sumaKr21p5p5Julio   = 0; %> <% var sumaKr21apartaestudioJulio   = 0; %>
+
+                    <% var sumaKr21g2Agosto     = 0; %> <% var sumaKr21g3Agosto     = 0; %> <% var sumaKr21p2p1Agosto   = 0; %> <% var sumaKr21p2p2Agosto   = 0; %>
+                    <% var sumaKr21p2p3Agosto   = 0; %> <% var sumaKr21p2p4Agosto   = 0; %> <% var sumaKr21p3p1Agosto   = 0; %> <% var sumaKr21p3p2Agosto   = 0; %>
+                    <% var sumaKr21p3p3Agosto   = 0; %> <% var sumaKr21p3p4Agosto   = 0; %> <% var sumaKr21p3p5Agosto   = 0; %> <% var sumaKr21p4p1Agosto   = 0; %>
+                    <% var sumaKr21p4p2Agosto   = 0; %> <% var sumaKr21p4p3Agosto   = 0; %> <% var sumaKr21p4p4Agosto   = 0; %> <% var sumaKr21p4p5Agosto   = 0; %>
+                    <% var sumaKr21p5p1Agosto   = 0; %> <% var sumaKr21p5p2Agosto   = 0; %> <% var sumaKr21p5p3Agosto   = 0; %> <% var sumaKr21p5p4Agosto   = 0; %>
+                    <% var sumaKr21p5p5Agosto   = 0; %> <% var sumaKr21apartaestudioAgosto   = 0; %>
+
+                    <% var sumaKr21g2Septiembre     = 0; %> <% var sumaKr21g3Septiembre     = 0; %> <% var sumaKr21p2p1Septiembre   = 0; %> <% var sumaKr21p2p2Septiembre   = 0; %>
+                    <% var sumaKr21p2p3Septiembre   = 0; %> <% var sumaKr21p2p4Septiembre   = 0; %> <% var sumaKr21p3p1Septiembre   = 0; %> <% var sumaKr21p3p2Septiembre   = 0; %>
+                    <% var sumaKr21p3p3Septiembre   = 0; %> <% var sumaKr21p3p4Septiembre   = 0; %> <% var sumaKr21p3p5Septiembre   = 0; %> <% var sumaKr21p4p1Septiembre   = 0; %>
+                    <% var sumaKr21p4p2Septiembre   = 0; %> <% var sumaKr21p4p3Septiembre   = 0; %> <% var sumaKr21p4p4Septiembre   = 0; %> <% var sumaKr21p4p5Septiembre   = 0; %>
+                    <% var sumaKr21p5p1Septiembre   = 0; %> <% var sumaKr21p5p2Septiembre   = 0; %> <% var sumaKr21p5p3Septiembre   = 0; %> <% var sumaKr21p5p4Septiembre   = 0; %>
+                    <% var sumaKr21p5p5Septiembre   = 0; %> <% var sumaKr21apartaestudioSeptiembre   = 0; %>
+
+                    <% var sumaKr21g2Octubre     = 0; %> <% var sumaKr21g3Octubre     = 0; %> <% var sumaKr21p2p1Octubre   = 0; %> <% var sumaKr21p2p2Octubre   = 0; %>
+                    <% var sumaKr21p2p3Octubre   = 0; %> <% var sumaKr21p2p4Octubre   = 0; %> <% var sumaKr21p3p1Octubre   = 0; %> <% var sumaKr21p3p2Octubre   = 0; %>
+                    <% var sumaKr21p3p3Octubre   = 0; %> <% var sumaKr21p3p4Octubre   = 0; %> <% var sumaKr21p3p5Octubre   = 0; %> <% var sumaKr21p4p1Octubre   = 0; %>
+                    <% var sumaKr21p4p2Octubre   = 0; %> <% var sumaKr21p4p3Octubre   = 0; %> <% var sumaKr21p4p4Octubre   = 0; %> <% var sumaKr21p4p5Octubre   = 0; %>
+                    <% var sumaKr21p5p1Octubre   = 0; %> <% var sumaKr21p5p2Octubre   = 0; %> <% var sumaKr21p5p3Octubre   = 0; %> <% var sumaKr21p5p4Octubre   = 0; %>
+                    <% var sumaKr21p5p5Octubre   = 0; %> <% var sumaKr21apartaestudioOctubre   = 0; %>
+
+                    <% var sumaKr21g2Noviembre     = 0; %> <% var sumaKr21g3Noviembre     = 0; %> <% var sumaKr21p2p1Noviembre   = 0; %> <% var sumaKr21p2p2Noviembre   = 0; %>
+                    <% var sumaKr21p2p3Noviembre   = 0; %> <% var sumaKr21p2p4Noviembre   = 0; %> <% var sumaKr21p3p1Noviembre   = 0; %> <% var sumaKr21p3p2Noviembre   = 0; %>
+                    <% var sumaKr21p3p3Noviembre   = 0; %> <% var sumaKr21p3p4Noviembre   = 0; %> <% var sumaKr21p3p5Noviembre   = 0; %> <% var sumaKr21p4p1Noviembre   = 0; %>
+                    <% var sumaKr21p4p2Noviembre   = 0; %> <% var sumaKr21p4p3Noviembre   = 0; %> <% var sumaKr21p4p4Noviembre   = 0; %> <% var sumaKr21p4p5Noviembre   = 0; %>
+                    <% var sumaKr21p5p1Noviembre   = 0; %> <% var sumaKr21p5p2Noviembre   = 0; %> <% var sumaKr21p5p3Noviembre   = 0; %> <% var sumaKr21p5p4Noviembre   = 0; %>
+                    <% var sumaKr21p5p5Noviembre   = 0; %> <% var sumaKr21apartaestudioNoviembre   = 0; %>
+
+                    <% var sumaKr21g2Diciembre     = 0; %> <% var sumaKr21g3Diciembre     = 0; %> <% var sumaKr21p2p1Diciembre   = 0; %> <% var sumaKr21p2p2Diciembre   = 0; %>
+                    <% var sumaKr21p2p3Diciembre   = 0; %> <% var sumaKr21p2p4Diciembre   = 0; %> <% var sumaKr21p3p1Diciembre   = 0; %> <% var sumaKr21p3p2Diciembre   = 0; %>
+                    <% var sumaKr21p3p3Diciembre   = 0; %> <% var sumaKr21p3p4Diciembre   = 0; %> <% var sumaKr21p3p5Diciembre   = 0; %> <% var sumaKr21p4p1Diciembre   = 0; %>
+                    <% var sumaKr21p4p2Diciembre   = 0; %> <% var sumaKr21p4p3Diciembre   = 0; %> <% var sumaKr21p4p4Diciembre   = 0; %> <% var sumaKr21p4p5Diciembre   = 0; %>
+                    <% var sumaKr21p5p1Diciembre   = 0; %> <% var sumaKr21p5p2Diciembre   = 0; %> <% var sumaKr21p5p3Diciembre   = 0; %> <% var sumaKr21p5p4Diciembre   = 0; %>
+                    <% var sumaKr21p5p5Diciembre   = 0; %> <% var sumaKr21apartaestudioDiciembre   = 0; %>
+
+                                    <% ingresos.forEach((ingreso) => { %>
+                                            
+                                                                                  
+                                                 <% busquedaMes = ingreso.fecha[5] %>
+                                                 <% busquedaMes = "" + busquedaMes + ingreso.fecha[6] %> 
+
+                                            <% if(busquedaMes == "01"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoEnero = ingreso.dineroEntrante + sumaArriendoEnero;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaEnero = ingreso.dineroEntrante + sumaCosinaEnero;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraEnero = ingreso.dineroEntrante + sumaLavadoraEnero;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroEnero = ingreso.dineroEntrante + sumaOtroEnero;
+                                                }  
+                                                
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeEnero = ingreso.dineroEntrante + sumaKr19garajeEnero;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Enero = ingreso.dineroEntrante + sumaKr19p1p1Enero;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Enero = ingreso.dineroEntrante + sumaKr19p1p2Enero;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Enero = ingreso.dineroEntrante + sumaKr19p1p3Enero;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Enero = ingreso.dineroEntrante + sumaKr19p1p4Enero;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Enero = ingreso.dineroEntrante + sumaKr19p1p5Enero;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Enero = ingreso.dineroEntrante + sumaKr19p1p6Enero;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Enero = ingreso.dineroEntrante + sumaKr19p2p1Enero;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Enero = ingreso.dineroEntrante + sumaKr19p2p2Enero;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Enero = ingreso.dineroEntrante + sumaKr19p2p3Enero;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Enero = ingreso.dineroEntrante + sumaKr19p3p1Enero;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Enero = ingreso.dineroEntrante + sumaKr19p3p2Enero;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Enero = ingreso.dineroEntrante + sumaKr19p3p3Enero;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Enero = ingreso.dineroEntrante + sumaKr19p3p4Enero;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Enero = ingreso.dineroEntrante + sumaKr21g2Enero;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Enero = ingreso.dineroEntrante + sumaKr21g3Enero;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioEnero = ingreso.dineroEntrante + sumaKr21apartaestudioEnero;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Enero = ingreso.dineroEntrante + sumaKr21p2p1Enero;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Enero = ingreso.dineroEntrante + sumaKr21p2p2Enero;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Enero = ingreso.dineroEntrante + sumaKr21p2p3Enero;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Enero = ingreso.dineroEntrante + sumaKr21p2p4Enero;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Enero = ingreso.dineroEntrante + sumaKr21p3p1Enero;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Enero = ingreso.dineroEntrante + sumaKr21p3p2Enero;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Enero = ingreso.dineroEntrante + sumaKr21p3p3Enero;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Enero = ingreso.dineroEntrante + sumaKr21p3p4Enero;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Enero = ingreso.dineroEntrante + sumaKr21p3p5Enero;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Enero = ingreso.dineroEntrante + sumaKr21p4p1Enero;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Enero = ingreso.dineroEntrante + sumaKr21p4p2Enero;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Enero = ingreso.dineroEntrante + sumaKr21p4p3Enero;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Enero = ingreso.dineroEntrante + sumaKr21p4p4Enero;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Enero = ingreso.dineroEntrante + sumaKr21p4p5Enero;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Enero = ingreso.dineroEntrante + sumaKr21p5p1Enero;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Enero = ingreso.dineroEntrante + sumaKr21p5p2Enero;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Enero = ingreso.dineroEntrante + sumaKr21p5p3Enero;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Enero = ingreso.dineroEntrante + sumaKr21p5p4Enero;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Enero = ingreso.dineroEntrante + sumaKr21p5p5Enero;
+                                                } 
+                                               
+
+                                            } else if(busquedaMes == "02"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoFebrero = ingreso.dineroEntrante + sumaArriendoFebrero;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaFebrero = ingreso.dineroEntrante + sumaCosinaFebrero;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraFebrero = ingreso.dineroEntrante + sumaLavadoraFebrero;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroFebrero = ingreso.dineroEntrante + sumaOtroFebrero;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeFebrero = ingreso.dineroEntrante + sumaKr19garajeFebrero;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Febrero = ingreso.dineroEntrante + sumaKr19p1p1Febrero;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Febrero = ingreso.dineroEntrante + sumaKr19p1p2Febrero;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Febrero = ingreso.dineroEntrante + sumaKr19p1p3Febrero;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Febrero = ingreso.dineroEntrante + sumaKr19p1p4Febrero;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Febrero = ingreso.dineroEntrante + sumaKr19p1p5Febrero;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Febrero = ingreso.dineroEntrante + sumaKr19p1p6Febrero;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Febrero = ingreso.dineroEntrante + sumaKr19p2p1Febrero;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Febrero = ingreso.dineroEntrante + sumaKr19p2p2Febrero;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Febrero = ingreso.dineroEntrante + sumaKr19p2p3Febrero;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Febrero = ingreso.dineroEntrante + sumaKr19p3p1Febrero;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Febrero = ingreso.dineroEntrante + sumaKr19p3p2Febrero;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Febrero = ingreso.dineroEntrante + sumaKr19p3p3Febrero;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Febrero = ingreso.dineroEntrante + sumaKr19p3p4Febrero;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Febrero = ingreso.dineroEntrante + sumaKr21g2Febrero;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Febrero = ingreso.dineroEntrante + sumaKr21g3Febrero;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioFebrero = ingreso.dineroEntrante + sumaKr21apartaestudioFebrero;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Febrero = ingreso.dineroEntrante + sumaKr21p2p1Febrero;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Febrero = ingreso.dineroEntrante + sumaKr21p2p2Febrero;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Febrero = ingreso.dineroEntrante + sumaKr21p2p3Febrero;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Febrero = ingreso.dineroEntrante + sumaKr21p2p4Febrero;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Febrero = ingreso.dineroEntrante + sumaKr21p3p1Febrero;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Febrero = ingreso.dineroEntrante + sumaKr21p3p2Febrero;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Febrero = ingreso.dineroEntrante + sumaKr21p3p3Febrero;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Febrero = ingreso.dineroEntrante + sumaKr21p3p4Febrero;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Febrero = ingreso.dineroEntrante + sumaKr21p3p5Febrero;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Febrero = ingreso.dineroEntrante + sumaKr21p4p1Febrero;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Febrero = ingreso.dineroEntrante + sumaKr21p4p2Febrero;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Febrero = ingreso.dineroEntrante + sumaKr21p4p3Febrero;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Febrero = ingreso.dineroEntrante + sumaKr21p4p4Febrero;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Febrero = ingreso.dineroEntrante + sumaKr21p4p5Febrero;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Febrero = ingreso.dineroEntrante + sumaKr21p5p1Febrero;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Febrero = ingreso.dineroEntrante + sumaKr21p5p2Febrero;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Febrero = ingreso.dineroEntrante + sumaKr21p5p3Febrero;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Febrero = ingreso.dineroEntrante + sumaKr21p5p4Febrero;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Febrero = ingreso.dineroEntrante + sumaKr21p5p5Febrero;
+                                                } 
+
+                                            } else if(busquedaMes == "03"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoMarzo = ingreso.dineroEntrante + sumaArriendoMarzo;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaMarzo = ingreso.dineroEntrante + sumaCosinaMarzo;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraMarzo = ingreso.dineroEntrante + sumaLavadoraMarzo;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroMarzo = ingreso.dineroEntrante + sumaOtroMarzo;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeMarzo = ingreso.dineroEntrante + sumaKr19garajeMarzo;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Marzo = ingreso.dineroEntrante + sumaKr19p1p1Marzo;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Marzo = ingreso.dineroEntrante + sumaKr19p1p2Marzo;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Marzo = ingreso.dineroEntrante + sumaKr19p1p3Marzo;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Marzo = ingreso.dineroEntrante + sumaKr19p1p4Marzo;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Marzo = ingreso.dineroEntrante + sumaKr19p1p5Marzo;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Marzo = ingreso.dineroEntrante + sumaKr19p1p6Marzo;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Marzo = ingreso.dineroEntrante + sumaKr19p2p1Marzo;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Marzo = ingreso.dineroEntrante + sumaKr19p2p2Marzo;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Marzo = ingreso.dineroEntrante + sumaKr19p2p3Marzo;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Marzo = ingreso.dineroEntrante + sumaKr19p3p1Marzo;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Marzo = ingreso.dineroEntrante + sumaKr19p3p2Marzo;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Marzo = ingreso.dineroEntrante + sumaKr19p3p3Marzo;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Marzo = ingreso.dineroEntrante + sumaKr19p3p4Marzo;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Marzo = ingreso.dineroEntrante + sumaKr21g2Marzo;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Marzo = ingreso.dineroEntrante + sumaKr21g3Marzo;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioMarzo = ingreso.dineroEntrante + sumaKr21apartaestudioMarzo;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Marzo = ingreso.dineroEntrante + sumaKr21p2p1Marzo;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Marzo = ingreso.dineroEntrante + sumaKr21p2p2Marzo;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Marzo = ingreso.dineroEntrante + sumaKr21p2p3Marzo;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Marzo = ingreso.dineroEntrante + sumaKr21p2p4Marzo;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Marzo = ingreso.dineroEntrante + sumaKr21p3p1Marzo;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Marzo = ingreso.dineroEntrante + sumaKr21p3p2Marzo;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Marzo = ingreso.dineroEntrante + sumaKr21p3p3Marzo;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Marzo = ingreso.dineroEntrante + sumaKr21p3p4Marzo;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Marzo = ingreso.dineroEntrante + sumaKr21p3p5Marzo;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Marzo = ingreso.dineroEntrante + sumaKr21p4p1Marzo;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Marzo = ingreso.dineroEntrante + sumaKr21p4p2Marzo;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Marzo = ingreso.dineroEntrante + sumaKr21p4p3Marzo;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Marzo = ingreso.dineroEntrante + sumaKr21p4p4Marzo;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Marzo = ingreso.dineroEntrante + sumaKr21p4p5Marzo;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Marzo = ingreso.dineroEntrante + sumaKr21p5p1Marzo;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Marzo = ingreso.dineroEntrante + sumaKr21p5p2Marzo;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Marzo = ingreso.dineroEntrante + sumaKr21p5p3Marzo;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Marzo = ingreso.dineroEntrante + sumaKr21p5p4Marzo;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Marzo = ingreso.dineroEntrante + sumaKr21p5p5Marzo;
+                                                } 
+
+                                            } else if(busquedaMes == "04"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoAbril = ingreso.dineroEntrante + sumaArriendoAbril;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaAbril = ingreso.dineroEntrante + sumaCosinaAbril;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraAbril = ingreso.dineroEntrante + sumaLavadoraAbril;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroAbril = ingreso.dineroEntrante + sumaOtroAbril;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeAbril = ingreso.dineroEntrante + sumaKr19garajeAbril;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Abril = ingreso.dineroEntrante + sumaKr19p1p1Abril;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Abril = ingreso.dineroEntrante + sumaKr19p1p2Abril;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Abril = ingreso.dineroEntrante + sumaKr19p1p3Abril;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Abril = ingreso.dineroEntrante + sumaKr19p1p4Abril;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Abril = ingreso.dineroEntrante + sumaKr19p1p5Abril;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Abril = ingreso.dineroEntrante + sumaKr19p1p6Abril;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Abril = ingreso.dineroEntrante + sumaKr19p2p1Abril;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Abril = ingreso.dineroEntrante + sumaKr19p2p2Abril;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Abril = ingreso.dineroEntrante + sumaKr19p2p3Abril;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Abril = ingreso.dineroEntrante + sumaKr19p3p1Abril;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Abril = ingreso.dineroEntrante + sumaKr19p3p2Abril;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Abril = ingreso.dineroEntrante + sumaKr19p3p3Abril;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Abril = ingreso.dineroEntrante + sumaKr19p3p4Abril;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Abril = ingreso.dineroEntrante + sumaKr21g2Abril;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Abril = ingreso.dineroEntrante + sumaKr21g3Abril;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioAbril = ingreso.dineroEntrante + sumaKr21apartaestudioAbril;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Abril = ingreso.dineroEntrante + sumaKr21p2p1Abril;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Abril = ingreso.dineroEntrante + sumaKr21p2p2Abril;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Abril = ingreso.dineroEntrante + sumaKr21p2p3Abril;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Abril = ingreso.dineroEntrante + sumaKr21p2p4Abril;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Abril = ingreso.dineroEntrante + sumaKr21p3p1Abril;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Abril = ingreso.dineroEntrante + sumaKr21p3p2Abril;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Abril = ingreso.dineroEntrante + sumaKr21p3p3Abril;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Abril = ingreso.dineroEntrante + sumaKr21p3p4Abril;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Abril = ingreso.dineroEntrante + sumaKr21p3p5Abril;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Abril = ingreso.dineroEntrante + sumaKr21p4p1Abril;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Abril = ingreso.dineroEntrante + sumaKr21p4p2Abril;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Abril = ingreso.dineroEntrante + sumaKr21p4p3Abril;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Abril = ingreso.dineroEntrante + sumaKr21p4p4Abril;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Abril = ingreso.dineroEntrante + sumaKr21p4p5Abril;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Abril = ingreso.dineroEntrante + sumaKr21p5p1Abril;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Abril = ingreso.dineroEntrante + sumaKr21p5p2Abril;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Abril = ingreso.dineroEntrante + sumaKr21p5p3Abril;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Abril = ingreso.dineroEntrante + sumaKr21p5p4Abril;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Abril = ingreso.dineroEntrante + sumaKr21p5p5Abril;
+                                                } 
+
+                                            } else if(busquedaMes == "05"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoMayo = ingreso.dineroEntrante + sumaArriendoMayo;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaMayo = ingreso.dineroEntrante + sumaCosinaMayo;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraMayo = ingreso.dineroEntrante + sumaLavadoraMayo;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroMayo = ingreso.dineroEntrante + sumaOtroMayo;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeMayo = ingreso.dineroEntrante + sumaKr19garajeMayo;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Mayo = ingreso.dineroEntrante + sumaKr19p1p1Mayo;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Mayo = ingreso.dineroEntrante + sumaKr19p1p2Mayo;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Mayo = ingreso.dineroEntrante + sumaKr19p1p3Mayo;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Mayo = ingreso.dineroEntrante + sumaKr19p1p4Mayo;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Mayo = ingreso.dineroEntrante + sumaKr19p1p5Mayo;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Mayo = ingreso.dineroEntrante + sumaKr19p1p6Mayo;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Mayo = ingreso.dineroEntrante + sumaKr19p2p1Mayo;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Mayo = ingreso.dineroEntrante + sumaKr19p2p2Mayo;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Mayo = ingreso.dineroEntrante + sumaKr19p2p3Mayo;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Mayo = ingreso.dineroEntrante + sumaKr19p3p1Mayo;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Mayo = ingreso.dineroEntrante + sumaKr19p3p2Mayo;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Mayo = ingreso.dineroEntrante + sumaKr19p3p3Mayo;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Mayo = ingreso.dineroEntrante + sumaKr19p3p4Mayo;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Mayo = ingreso.dineroEntrante + sumaKr21g2Mayo;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Mayo = ingreso.dineroEntrante + sumaKr21g3Mayo;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioMayo = ingreso.dineroEntrante + sumaKr21apartaestudioMayo;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Mayo = ingreso.dineroEntrante + sumaKr21p2p1Mayo;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Mayo = ingreso.dineroEntrante + sumaKr21p2p2Mayo;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Mayo = ingreso.dineroEntrante + sumaKr21p2p3Mayo;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Mayo = ingreso.dineroEntrante + sumaKr21p2p4Mayo;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Mayo = ingreso.dineroEntrante + sumaKr21p3p1Mayo;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Mayo = ingreso.dineroEntrante + sumaKr21p3p2Mayo;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Mayo = ingreso.dineroEntrante + sumaKr21p3p3Mayo;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Mayo = ingreso.dineroEntrante + sumaKr21p3p4Mayo;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Mayo = ingreso.dineroEntrante + sumaKr21p3p5Mayo;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Mayo = ingreso.dineroEntrante + sumaKr21p4p1Mayo;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Mayo = ingreso.dineroEntrante + sumaKr21p4p2Mayo;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Mayo = ingreso.dineroEntrante + sumaKr21p4p3Mayo;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Mayo = ingreso.dineroEntrante + sumaKr21p4p4Mayo;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Mayo = ingreso.dineroEntrante + sumaKr21p4p5Mayo;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Mayo = ingreso.dineroEntrante + sumaKr21p5p1Mayo;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Mayo = ingreso.dineroEntrante + sumaKr21p5p2Mayo;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Mayo = ingreso.dineroEntrante + sumaKr21p5p3Mayo;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Mayo = ingreso.dineroEntrante + sumaKr21p5p4Mayo;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Mayo = ingreso.dineroEntrante + sumaKr21p5p5Mayo;
+                                                } 
+
+                                            } else if(busquedaMes == "06"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoJunio = ingreso.dineroEntrante + sumaArriendoJunio;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaJunio = ingreso.dineroEntrante + sumaCosinaJunio;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraJunio = ingreso.dineroEntrante + sumaLavadoraJunio;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroJunio = ingreso.dineroEntrante + sumaOtroJunio;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeJunio = ingreso.dineroEntrante + sumaKr19garajeJunio;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Junio = ingreso.dineroEntrante + sumaKr19p1p1Junio;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Junio = ingreso.dineroEntrante + sumaKr19p1p2Junio;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Junio = ingreso.dineroEntrante + sumaKr19p1p3Junio;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Junio = ingreso.dineroEntrante + sumaKr19p1p4Junio;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Junio = ingreso.dineroEntrante + sumaKr19p1p5Junio;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Junio = ingreso.dineroEntrante + sumaKr19p1p6Junio;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Junio = ingreso.dineroEntrante + sumaKr19p2p1Junio;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Junio = ingreso.dineroEntrante + sumaKr19p2p2Junio;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Junio = ingreso.dineroEntrante + sumaKr19p2p3Junio;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Junio = ingreso.dineroEntrante + sumaKr19p3p1Junio;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Junio = ingreso.dineroEntrante + sumaKr19p3p2Junio;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Junio = ingreso.dineroEntrante + sumaKr19p3p3Junio;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Junio = ingreso.dineroEntrante + sumaKr19p3p4Junio;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Junio = ingreso.dineroEntrante + sumaKr21g2Junio;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Junio = ingreso.dineroEntrante + sumaKr21g3Junio;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioJunio = ingreso.dineroEntrante + sumaKr21apartaestudioJunio;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Junio = ingreso.dineroEntrante + sumaKr21p2p1Junio;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Junio = ingreso.dineroEntrante + sumaKr21p2p2Junio;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Junio = ingreso.dineroEntrante + sumaKr21p2p3Junio;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Junio = ingreso.dineroEntrante + sumaKr21p2p4Junio;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Junio = ingreso.dineroEntrante + sumaKr21p3p1Junio;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Junio = ingreso.dineroEntrante + sumaKr21p3p2Junio;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Junio = ingreso.dineroEntrante + sumaKr21p3p3Junio;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Junio = ingreso.dineroEntrante + sumaKr21p3p4Junio;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Junio = ingreso.dineroEntrante + sumaKr21p3p5Junio;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Junio = ingreso.dineroEntrante + sumaKr21p4p1Junio;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Junio = ingreso.dineroEntrante + sumaKr21p4p2Junio;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Junio = ingreso.dineroEntrante + sumaKr21p4p3Junio;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Junio = ingreso.dineroEntrante + sumaKr21p4p4Junio;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Junio = ingreso.dineroEntrante + sumaKr21p4p5Junio;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Junio = ingreso.dineroEntrante + sumaKr21p5p1Junio;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Junio = ingreso.dineroEntrante + sumaKr21p5p2Junio;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Junio = ingreso.dineroEntrante + sumaKr21p5p3Junio;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Junio = ingreso.dineroEntrante + sumaKr21p5p4Junio;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Junio = ingreso.dineroEntrante + sumaKr21p5p5Junio;
+                                                } 
+
+                                            } else if(busquedaMes == "07"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoJulio = ingreso.dineroEntrante + sumaArriendoJulio;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaJulio = ingreso.dineroEntrante + sumaCosinaJulio;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraJulio = ingreso.dineroEntrante + sumaLavadoraJulio;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroJulio = ingreso.dineroEntrante + sumaOtroJulio;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeJulio = ingreso.dineroEntrante + sumaKr19garajeJulio;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Julio = ingreso.dineroEntrante + sumaKr19p1p1Julio;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Julio = ingreso.dineroEntrante + sumaKr19p1p2Julio;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Julio = ingreso.dineroEntrante + sumaKr19p1p3Julio;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Julio = ingreso.dineroEntrante + sumaKr19p1p4Julio;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Julio = ingreso.dineroEntrante + sumaKr19p1p5Julio;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Julio = ingreso.dineroEntrante + sumaKr19p1p6Julio;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Julio = ingreso.dineroEntrante + sumaKr19p2p1Julio;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Julio = ingreso.dineroEntrante + sumaKr19p2p2Julio;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Julio = ingreso.dineroEntrante + sumaKr19p2p3Julio;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Julio = ingreso.dineroEntrante + sumaKr19p3p1Julio;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Julio = ingreso.dineroEntrante + sumaKr19p3p2Julio;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Julio = ingreso.dineroEntrante + sumaKr19p3p3Julio;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Julio = ingreso.dineroEntrante + sumaKr19p3p4Julio;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Julio = ingreso.dineroEntrante + sumaKr21g2Julio;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Julio = ingreso.dineroEntrante + sumaKr21g3Julio;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioJulio = ingreso.dineroEntrante + sumaKr21apartaestudioJulio;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Julio = ingreso.dineroEntrante + sumaKr21p2p1Julio;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Julio = ingreso.dineroEntrante + sumaKr21p2p2Julio;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Julio = ingreso.dineroEntrante + sumaKr21p2p3Julio;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Julio = ingreso.dineroEntrante + sumaKr21p2p4Julio;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Julio = ingreso.dineroEntrante + sumaKr21p3p1Julio;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Julio = ingreso.dineroEntrante + sumaKr21p3p2Julio;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Julio = ingreso.dineroEntrante + sumaKr21p3p3Julio;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Julio = ingreso.dineroEntrante + sumaKr21p3p4Julio;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Julio = ingreso.dineroEntrante + sumaKr21p3p5Julio;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Julio = ingreso.dineroEntrante + sumaKr21p4p1Julio;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Julio = ingreso.dineroEntrante + sumaKr21p4p2Julio;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Julio = ingreso.dineroEntrante + sumaKr21p4p3Julio;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Julio = ingreso.dineroEntrante + sumaKr21p4p4Julio;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Julio = ingreso.dineroEntrante + sumaKr21p4p5Julio;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Julio = ingreso.dineroEntrante + sumaKr21p5p1Julio;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Julio = ingreso.dineroEntrante + sumaKr21p5p2Julio;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Julio = ingreso.dineroEntrante + sumaKr21p5p3Julio;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Julio = ingreso.dineroEntrante + sumaKr21p5p4Julio;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Julio = ingreso.dineroEntrante + sumaKr21p5p5Julio;
+                                                } 
+
+                                            } else if(busquedaMes == "08"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoAgosto = ingreso.dineroEntrante + sumaArriendoAgosto;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaAgosto = ingreso.dineroEntrante + sumaCosinaAgosto;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraAgosto = ingreso.dineroEntrante + sumaLavadoraAgosto;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroAgosto = ingreso.dineroEntrante + sumaOtroAgosto;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeAgosto = ingreso.dineroEntrante + sumaKr19garajeAgosto;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Agosto = ingreso.dineroEntrante + sumaKr19p1p1Agosto;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Agosto = ingreso.dineroEntrante + sumaKr19p1p2Agosto;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Agosto = ingreso.dineroEntrante + sumaKr19p1p3Agosto;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Agosto = ingreso.dineroEntrante + sumaKr19p1p4Agosto;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Agosto = ingreso.dineroEntrante + sumaKr19p1p5Agosto;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Agosto = ingreso.dineroEntrante + sumaKr19p1p6Agosto;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Agosto = ingreso.dineroEntrante + sumaKr19p2p1Agosto;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Agosto = ingreso.dineroEntrante + sumaKr19p2p2Agosto;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Agosto = ingreso.dineroEntrante + sumaKr19p2p3Agosto;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Agosto = ingreso.dineroEntrante + sumaKr19p3p1Agosto;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Agosto = ingreso.dineroEntrante + sumaKr19p3p2Agosto;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Agosto = ingreso.dineroEntrante + sumaKr19p3p3Agosto;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Agosto = ingreso.dineroEntrante + sumaKr19p3p4Agosto;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Agosto = ingreso.dineroEntrante + sumaKr21g2Agosto;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Agosto = ingreso.dineroEntrante + sumaKr21g3Agosto;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioAgosto = ingreso.dineroEntrante + sumaKr21apartaestudioAgosto;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Agosto = ingreso.dineroEntrante + sumaKr21p2p1Agosto;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Agosto = ingreso.dineroEntrante + sumaKr21p2p2Agosto;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Agosto = ingreso.dineroEntrante + sumaKr21p2p3Agosto;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Agosto = ingreso.dineroEntrante + sumaKr21p2p4Agosto;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Agosto = ingreso.dineroEntrante + sumaKr21p3p1Agosto;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Agosto = ingreso.dineroEntrante + sumaKr21p3p2Agosto;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Agosto = ingreso.dineroEntrante + sumaKr21p3p3Agosto;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Agosto = ingreso.dineroEntrante + sumaKr21p3p4Agosto;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Agosto = ingreso.dineroEntrante + sumaKr21p3p5Agosto;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Agosto = ingreso.dineroEntrante + sumaKr21p4p1Agosto;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Agosto = ingreso.dineroEntrante + sumaKr21p4p2Agosto;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Agosto = ingreso.dineroEntrante + sumaKr21p4p3Agosto;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Agosto = ingreso.dineroEntrante + sumaKr21p4p4Agosto;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Agosto = ingreso.dineroEntrante + sumaKr21p4p5Agosto;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Agosto = ingreso.dineroEntrante + sumaKr21p5p1Agosto;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Agosto = ingreso.dineroEntrante + sumaKr21p5p2Agosto;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Agosto = ingreso.dineroEntrante + sumaKr21p5p3Agosto;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Agosto = ingreso.dineroEntrante + sumaKr21p5p4Agosto;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Agosto = ingreso.dineroEntrante + sumaKr21p5p5Agosto;
+                                                } 
+
+                                            } else if(busquedaMes == "09"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoSeptiembre = ingreso.dineroEntrante + sumaArriendoSeptiembre;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaSeptiembre = ingreso.dineroEntrante + sumaCosinaSeptiembre;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraSeptiembre = ingreso.dineroEntrante + sumaLavadoraSeptiembre;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroSeptiembre = ingreso.dineroEntrante + sumaOtroSeptiembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeSeptiembre = ingreso.dineroEntrante + sumaKr19garajeSeptiembre;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Septiembre = ingreso.dineroEntrante + sumaKr19p1p1Septiembre;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Septiembre = ingreso.dineroEntrante + sumaKr19p1p2Septiembre;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Septiembre = ingreso.dineroEntrante + sumaKr19p1p3Septiembre;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Septiembre = ingreso.dineroEntrante + sumaKr19p1p4Septiembre;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Septiembre = ingreso.dineroEntrante + sumaKr19p1p5Septiembre;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Septiembre = ingreso.dineroEntrante + sumaKr19p1p6Septiembre;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Septiembre = ingreso.dineroEntrante + sumaKr19p2p1Septiembre;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Septiembre = ingreso.dineroEntrante + sumaKr19p2p2Septiembre;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Septiembre = ingreso.dineroEntrante + sumaKr19p2p3Septiembre;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Septiembre = ingreso.dineroEntrante + sumaKr19p3p1Septiembre;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Septiembre = ingreso.dineroEntrante + sumaKr19p3p2Septiembre;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Septiembre = ingreso.dineroEntrante + sumaKr19p3p3Septiembre;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Septiembre = ingreso.dineroEntrante + sumaKr19p3p4Septiembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Septiembre = ingreso.dineroEntrante + sumaKr21g2Septiembre;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Septiembre = ingreso.dineroEntrante + sumaKr21g3Septiembre;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioSeptiembre = ingreso.dineroEntrante + sumaKr21apartaestudioSeptiembre;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Septiembre = ingreso.dineroEntrante + sumaKr21p2p1Septiembre;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Septiembre = ingreso.dineroEntrante + sumaKr21p2p2Septiembre;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Septiembre = ingreso.dineroEntrante + sumaKr21p2p3Septiembre;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Septiembre = ingreso.dineroEntrante + sumaKr21p2p4Septiembre;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Septiembre = ingreso.dineroEntrante + sumaKr21p3p1Septiembre;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Septiembre = ingreso.dineroEntrante + sumaKr21p3p2Septiembre;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Septiembre = ingreso.dineroEntrante + sumaKr21p3p3Septiembre;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Septiembre = ingreso.dineroEntrante + sumaKr21p3p4Septiembre;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Septiembre = ingreso.dineroEntrante + sumaKr21p3p5Septiembre;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Septiembre = ingreso.dineroEntrante + sumaKr21p4p1Septiembre;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Septiembre = ingreso.dineroEntrante + sumaKr21p4p2Septiembre;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Septiembre = ingreso.dineroEntrante + sumaKr21p4p3Septiembre;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Septiembre = ingreso.dineroEntrante + sumaKr21p4p4Septiembre;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Septiembre = ingreso.dineroEntrante + sumaKr21p4p5Septiembre;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Septiembre = ingreso.dineroEntrante + sumaKr21p5p1Septiembre;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Septiembre = ingreso.dineroEntrante + sumaKr21p5p2Septiembre;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Septiembre = ingreso.dineroEntrante + sumaKr21p5p3Septiembre;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Septiembre = ingreso.dineroEntrante + sumaKr21p5p4Septiembre;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Septiembre = ingreso.dineroEntrante + sumaKr21p5p5Septiembre;
+                                                } 
+
+                                            } else if(busquedaMes == "10"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoOctubre = ingreso.dineroEntrante + sumaArriendoOctubre;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaOctubre = ingreso.dineroEntrante + sumaCosinaOctubre;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraOctubre = ingreso.dineroEntrante + sumaLavadoraOctubre;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroOctubre = ingreso.dineroEntrante + sumaOtroOctubre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeOctubre = ingreso.dineroEntrante + sumaKr19garajeOctubre;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Octubre = ingreso.dineroEntrante + sumaKr19p1p1Octubre;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Octubre = ingreso.dineroEntrante + sumaKr19p1p2Octubre;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Octubre = ingreso.dineroEntrante + sumaKr19p1p3Octubre;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Octubre = ingreso.dineroEntrante + sumaKr19p1p4Octubre;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Octubre = ingreso.dineroEntrante + sumaKr19p1p5Octubre;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Octubre = ingreso.dineroEntrante + sumaKr19p1p6Octubre;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Octubre = ingreso.dineroEntrante + sumaKr19p2p1Octubre;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Octubre = ingreso.dineroEntrante + sumaKr19p2p2Octubre;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Octubre = ingreso.dineroEntrante + sumaKr19p2p3Octubre;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Octubre = ingreso.dineroEntrante + sumaKr19p3p1Octubre;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Octubre = ingreso.dineroEntrante + sumaKr19p3p2Octubre;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Octubre = ingreso.dineroEntrante + sumaKr19p3p3Octubre;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Octubre = ingreso.dineroEntrante + sumaKr19p3p4Octubre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Octubre = ingreso.dineroEntrante + sumaKr21g2Octubre;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Octubre = ingreso.dineroEntrante + sumaKr21g3Octubre;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioOctubre = ingreso.dineroEntrante + sumaKr21apartaestudioOctubre;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Octubre = ingreso.dineroEntrante + sumaKr21p2p1Octubre;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Octubre = ingreso.dineroEntrante + sumaKr21p2p2Octubre;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Octubre = ingreso.dineroEntrante + sumaKr21p2p3Octubre;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Octubre = ingreso.dineroEntrante + sumaKr21p2p4Octubre;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Octubre = ingreso.dineroEntrante + sumaKr21p3p1Octubre;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Octubre = ingreso.dineroEntrante + sumaKr21p3p2Octubre;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Octubre = ingreso.dineroEntrante + sumaKr21p3p3Octubre;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Octubre = ingreso.dineroEntrante + sumaKr21p3p4Octubre;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Octubre = ingreso.dineroEntrante + sumaKr21p3p5Octubre;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Octubre = ingreso.dineroEntrante + sumaKr21p4p1Octubre;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Octubre = ingreso.dineroEntrante + sumaKr21p4p2Octubre;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Octubre = ingreso.dineroEntrante + sumaKr21p4p3Octubre;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Octubre = ingreso.dineroEntrante + sumaKr21p4p4Octubre;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Octubre = ingreso.dineroEntrante + sumaKr21p4p5Octubre;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Octubre = ingreso.dineroEntrante + sumaKr21p5p1Octubre;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Octubre = ingreso.dineroEntrante + sumaKr21p5p2Octubre;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Octubre = ingreso.dineroEntrante + sumaKr21p5p3Octubre;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Octubre = ingreso.dineroEntrante + sumaKr21p5p4Octubre;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Octubre = ingreso.dineroEntrante + sumaKr21p5p5Octubre;
+                                                } 
+
+                                            } else if(busquedaMes == "11"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoNoviembre = ingreso.dineroEntrante + sumaArriendoNoviembre;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaNoviembre = ingreso.dineroEntrante + sumaCosinaNoviembre;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraNoviembre = ingreso.dineroEntrante + sumaLavadoraNoviembre;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroNoviembre = ingreso.dineroEntrante + sumaOtroNoviembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeNoviembre = ingreso.dineroEntrante + sumaKr19garajeNoviembre;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Noviembre = ingreso.dineroEntrante + sumaKr19p1p1Noviembre;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Noviembre = ingreso.dineroEntrante + sumaKr19p1p2Noviembre;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Noviembre = ingreso.dineroEntrante + sumaKr19p1p3Noviembre;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Noviembre = ingreso.dineroEntrante + sumaKr19p1p4Noviembre;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Noviembre = ingreso.dineroEntrante + sumaKr19p1p5Noviembre;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Noviembre = ingreso.dineroEntrante + sumaKr19p1p6Noviembre;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Noviembre = ingreso.dineroEntrante + sumaKr19p2p1Noviembre;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Noviembre = ingreso.dineroEntrante + sumaKr19p2p2Noviembre;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Noviembre = ingreso.dineroEntrante + sumaKr19p2p3Noviembre;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Noviembre = ingreso.dineroEntrante + sumaKr19p3p1Noviembre;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Noviembre = ingreso.dineroEntrante + sumaKr19p3p2Noviembre;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Noviembre = ingreso.dineroEntrante + sumaKr19p3p3Noviembre;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Noviembre = ingreso.dineroEntrante + sumaKr19p3p4Noviembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Noviembre = ingreso.dineroEntrante + sumaKr21g2Noviembre;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Noviembre = ingreso.dineroEntrante + sumaKr21g3Noviembre;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioNoviembre = ingreso.dineroEntrante + sumaKr21apartaestudioNoviembre;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Noviembre = ingreso.dineroEntrante + sumaKr21p2p1Noviembre;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Noviembre = ingreso.dineroEntrante + sumaKr21p2p2Noviembre;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Noviembre = ingreso.dineroEntrante + sumaKr21p2p3Noviembre;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Noviembre = ingreso.dineroEntrante + sumaKr21p2p4Noviembre;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Noviembre = ingreso.dineroEntrante + sumaKr21p3p1Noviembre;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Noviembre = ingreso.dineroEntrante + sumaKr21p3p2Noviembre;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Noviembre = ingreso.dineroEntrante + sumaKr21p3p3Noviembre;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Noviembre = ingreso.dineroEntrante + sumaKr21p3p4Noviembre;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Noviembre = ingreso.dineroEntrante + sumaKr21p3p5Noviembre;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Noviembre = ingreso.dineroEntrante + sumaKr21p4p1Noviembre;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Noviembre = ingreso.dineroEntrante + sumaKr21p4p2Noviembre;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Noviembre = ingreso.dineroEntrante + sumaKr21p4p3Noviembre;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Noviembre = ingreso.dineroEntrante + sumaKr21p4p4Noviembre;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Noviembre = ingreso.dineroEntrante + sumaKr21p4p5Noviembre;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Noviembre = ingreso.dineroEntrante + sumaKr21p5p1Noviembre;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Noviembre = ingreso.dineroEntrante + sumaKr21p5p2Noviembre;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Noviembre = ingreso.dineroEntrante + sumaKr21p5p3Noviembre;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Noviembre = ingreso.dineroEntrante + sumaKr21p5p4Noviembre;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Noviembre = ingreso.dineroEntrante + sumaKr21p5p5Noviembre;
+                                                } 
+
+                                            } else if(busquedaMes == "12"){
+                                                if(ingreso.concepto == "arriendo"){
+                                                    sumaArriendoDiciembre = ingreso.dineroEntrante + sumaArriendoDiciembre;
+                                                } if(ingreso.concepto == "cosina"){
+                                                    sumaCosinaDiciembre = ingreso.dineroEntrante + sumaCosinaDiciembre;
+                                                } if(ingreso.concepto == "lavadora"){
+                                                    sumaLavadoraDiciembre = ingreso.dineroEntrante + sumaLavadoraDiciembre;
+                                                }  if(ingreso.concepto == "otro"){
+                                                    sumaOtroDiciembre = ingreso.dineroEntrante + sumaOtroDiciembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr19garaje"){
+                                                    sumaKr19garajeDiciembre = ingreso.dineroEntrante + sumaKr19garajeDiciembre;
+                                                } if(ingreso.direccion == "kr19p1p1"){
+                                                    sumaKr19p1p1Diciembre = ingreso.dineroEntrante + sumaKr19p1p1Diciembre;
+                                                } if(ingreso.direccion == "kr19p1p2"){
+                                                    sumaKr19p1p2Diciembre = ingreso.dineroEntrante + sumaKr19p1p2Diciembre;
+                                                } if(ingreso.direccion == "kr19p1p3"){
+                                                    sumaKr19p1p3Diciembre = ingreso.dineroEntrante + sumaKr19p1p3Diciembre;
+                                                } if(ingreso.direccion == "kr19p1p4"){
+                                                    sumaKr19p1p4Diciembre = ingreso.dineroEntrante + sumaKr19p1p4Diciembre;
+                                                } if(ingreso.direccion == "kr19p1p5"){
+                                                    sumaKr19p1p5Diciembre = ingreso.dineroEntrante + sumaKr19p1p5Diciembre;
+                                                } if(ingreso.direccion == "kr19p1p6"){
+                                                    sumaKr19p1p6Diciembre = ingreso.dineroEntrante + sumaKr19p1p6Diciembre;
+                                                } if(ingreso.direccion == "kr19p2p1"){
+                                                    sumaKr19p2p1Diciembre = ingreso.dineroEntrante + sumaKr19p2p1Diciembre;
+                                                } if(ingreso.direccion == "kr19p2p2"){
+                                                    sumaKr19p2p2Diciembre = ingreso.dineroEntrante + sumaKr19p2p2Diciembre;
+                                                } if(ingreso.direccion == "kr19p2p3"){
+                                                    sumaKr19p2p3Diciembre = ingreso.dineroEntrante + sumaKr19p2p3Diciembre;
+                                                } if(ingreso.direccion == "kr19p3p1"){
+                                                    sumaKr19p3p1Diciembre = ingreso.dineroEntrante + sumaKr19p3p1Diciembre;
+                                                } if(ingreso.direccion == "kr19p3p2"){
+                                                    sumaKr19p3p2Diciembre = ingreso.dineroEntrante + sumaKr19p3p2Diciembre;
+                                                } if(ingreso.direccion == "kr19p3p3"){
+                                                    sumaKr19p3p3Diciembre = ingreso.dineroEntrante + sumaKr19p3p3Diciembre;
+                                                } if(ingreso.direccion == "kr19p3p4"){
+                                                    sumaKr19p3p4Diciembre = ingreso.dineroEntrante + sumaKr19p3p4Diciembre;
+                                                } 
+
+                                                if(ingreso.direccion == "kr21g2"){
+                                                    sumaKr21g2Diciembre = ingreso.dineroEntrante + sumaKr21g2Diciembre;
+                                                } if(ingreso.direccion == "kr21g3"){
+                                                    sumaKr21g3Diciembre = ingreso.dineroEntrante + sumaKr21g3Diciembre;
+                                                } if(ingreso.direccion == "kr21apartaestudio"){
+                                                    sumaKr21apartaestudioDiciembre = ingreso.dineroEntrante + sumaKr21apartaestudioDiciembre;
+                                                } if(ingreso.direccion == "kr21p2p1"){
+                                                    sumaKr21p2p1Diciembre = ingreso.dineroEntrante + sumaKr21p2p1Diciembre;
+                                                } if(ingreso.direccion == "kr21p2p2"){
+                                                    sumaKr21p2p2Diciembre = ingreso.dineroEntrante + sumaKr21p2p2Diciembre;
+                                                } if(ingreso.direccion == "kr21p2p3"){
+                                                    sumaKr21p2p3Diciembre = ingreso.dineroEntrante + sumaKr21p2p3Diciembre;
+                                                } if(ingreso.direccion == "kr21p2p4"){
+                                                    sumaKr21p2p4Diciembre = ingreso.dineroEntrante + sumaKr21p2p4Diciembre;
+                                                } if(ingreso.direccion == "kr21p3p1"){
+                                                    sumaKr21p3p1Diciembre = ingreso.dineroEntrante + sumaKr21p3p1Diciembre;
+                                                } if(ingreso.direccion == "kr21p3p2"){
+                                                    sumaKr21p3p2Diciembre = ingreso.dineroEntrante + sumaKr21p3p2Diciembre;
+                                                } if(ingreso.direccion == "kr21p3p3"){
+                                                    sumaKr21p3p3Diciembre = ingreso.dineroEntrante + sumaKr21p3p3Diciembre;
+                                                } if(ingreso.direccion == "kr21p3p4"){
+                                                    sumaKr21p3p4Diciembre = ingreso.dineroEntrante + sumaKr21p3p4Diciembre;
+                                                } if(ingreso.direccion == "kr21p3p5"){
+                                                    sumaKr21p3p5Diciembre = ingreso.dineroEntrante + sumaKr21p3p5Diciembre;
+                                                } if(ingreso.direccion == "kr21p4p1"){
+                                                    sumaKr21p4p1Diciembre = ingreso.dineroEntrante + sumaKr21p4p1Diciembre;
+                                                } if(ingreso.direccion == "kr21p4p2"){
+                                                    sumaKr21p4p2Diciembre = ingreso.dineroEntrante + sumaKr21p4p2Diciembre;
+                                                } if(ingreso.direccion == "kr21p4p3"){
+                                                    sumaKr21p4p3Diciembre = ingreso.dineroEntrante + sumaKr21p4p3Diciembre;
+                                                } if(ingreso.direccion == "kr21p4p4"){
+                                                    sumaKr21p4p4Diciembre = ingreso.dineroEntrante + sumaKr21p4p4Diciembre;
+                                                } if(ingreso.direccion == "kr21p4p5"){
+                                                    sumaKr21p4p5Diciembre = ingreso.dineroEntrante + sumaKr21p4p5Diciembre;
+                                                } if(ingreso.direccion == "kr21p5p1"){
+                                                    sumaKr21p5p1Diciembre = ingreso.dineroEntrante + sumaKr21p5p1Diciembre;
+                                                } if(ingreso.direccion == "kr21p5p2"){
+                                                    sumaKr21p5p2Diciembre = ingreso.dineroEntrante + sumaKr21p5p2Diciembre;
+                                                } if(ingreso.direccion == "kr21p5p3"){
+                                                    sumaKr21p5p3Diciembre = ingreso.dineroEntrante + sumaKr21p5p3Diciembre;
+                                                } if(ingreso.direccion == "kr21p5p4"){
+                                                    sumaKr21p5p4Diciembre = ingreso.dineroEntrante + sumaKr21p5p4Diciembre;
+                                                } if(ingreso.direccion == "kr21p5p5"){
+                                                    sumaKr21p5p5Diciembre = ingreso.dineroEntrante + sumaKr21p5p5Diciembre;
+                                                } 
+
+                                            }
+                                            %>
+
+                                            
+                                    <% })%> 
+                                        <!--    -->
+                                            <tr class="color1">
+                                                <td>ARRIENDO </td>
+                                                <td>$ <%= sumaArriendoEnero  %></td>
+                                                <td>$ <%= sumaArriendoFebrero  %></td>
+                                                <td>$ <%= sumaArriendoMarzo  %></td>
+                                                <td>$ <%= sumaArriendoAbril  %></td>
+                                                <td>$ <%= sumaArriendoMayo  %></td>
+                                                <td>$ <%= sumaArriendoJunio  %></td>
+                                                <td>$ <%= sumaArriendoJulio  %></td>
+                                                <td>$ <%= sumaArriendoAgosto  %></td>
+                                                <td>$ <%= sumaArriendoSeptiembre  %></td>
+                                                <td>$ <%= sumaArriendoOctubre  %></td>
+                                                <td>$ <%= sumaArriendoNoviembre  %></td>
+                                                <td>$ <%= sumaArriendoDiciembre  %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>COSINA </td>
+                                                <td>$ <%= sumaCosinaEnero  %></td>
+                                                <td>$ <%= sumaCosinaFebrero  %></td>
+                                                <td>$ <%= sumaCosinaMarzo  %></td>
+                                                <td>$ <%= sumaCosinaAbril  %></td>
+                                                <td>$ <%= sumaCosinaMayo  %></td>
+                                                <td>$ <%= sumaCosinaJunio  %></td>
+                                                <td>$ <%= sumaCosinaJulio  %></td>
+                                                <td>$ <%= sumaCosinaAgosto  %></td>
+                                                <td>$ <%= sumaCosinaSeptiembre  %></td>
+                                                <td>$ <%= sumaCosinaOctubre  %></td>
+                                                <td>$ <%= sumaCosinaNoviembre  %></td>
+                                                <td>$ <%= sumaCosinaDiciembre  %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>LAVADORA </td>
+                                                <td>$ <%= sumaLavadoraEnero  %></td>
+                                                <td>$ <%= sumaLavadoraFebrero  %></td>
+                                                <td>$ <%= sumaLavadoraMarzo  %></td>
+                                                <td>$ <%= sumaLavadoraAbril  %></td>
+                                                <td>$ <%= sumaLavadoraMayo  %></td>
+                                                <td>$ <%= sumaLavadoraJunio  %></td>
+                                                <td>$ <%= sumaLavadoraJulio  %></td>
+                                                <td>$ <%= sumaLavadoraAgosto  %></td>
+                                                <td>$ <%= sumaLavadoraSeptiembre  %></td>
+                                                <td>$ <%= sumaLavadoraOctubre  %></td>
+                                                <td>$ <%= sumaLavadoraNoviembre  %></td>
+                                                <td>$ <%= sumaLavadoraDiciembre  %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>OTRO </td>
+                                                <td>$ <%= sumaOtroEnero  %></td>
+                                                <td>$ <%= sumaOtroFebrero  %></td>
+                                                <td>$ <%= sumaOtroMarzo  %></td>
+                                                <td>$ <%= sumaOtroAbril  %></td>
+                                                <td>$ <%= sumaOtroMayo  %></td>
+                                                <td>$ <%= sumaOtroJunio  %></td>
+                                                <td>$ <%= sumaOtroJulio  %></td>
+                                                <td>$ <%= sumaOtroAgosto  %></td>
+                                                <td>$ <%= sumaOtroSeptiembre  %></td>
+                                                <td>$ <%= sumaOtroOctubre  %></td>
+                                                <td>$ <%= sumaOtroNoviembre  %></td>
+                                                <td>$ <%= sumaOtroDiciembre  %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>TODO JUNTO </td>
+                                                <td>$ <%= sumaArriendoEnero + sumaCosinaEnero + sumaLavadoraEnero + sumaOtroEnero  %></td>
+                                                <td>$ <%= sumaArriendoFebrero + sumaCosinaFebrero + sumaLavadoraFebrero + sumaOtroFebrero  %></td>
+                                                <td>$ <%= sumaArriendoMarzo + sumaCosinaMarzo + sumaLavadoraMarzo + sumaOtroMarzo  %></td>
+                                                <td>$ <%= sumaArriendoAbril +sumaCosinaAbril + sumaLavadoraAbril + sumaOtroAbril  %></td>
+                                                <td>$ <%= sumaArriendoMayo +sumaCosinaMayo + sumaLavadoraMayo + sumaOtroMayo  %></td>
+                                                <td>$ <%= sumaArriendoJunio +sumaCosinaJunio + sumaLavadoraJunio + sumaOtroJunio  %></td>
+                                                <td>$ <%= sumaArriendoJulio +sumaCosinaJulio + sumaLavadoraJulio + sumaOtroJulio  %></td>
+                                                <td>$ <%= sumaArriendoAgosto +sumaCosinaAgosto + sumaLavadoraAgosto + sumaOtroAgosto  %></td>
+                                                <td>$ <%= sumaArriendoSeptiembre +sumaCosinaSeptiembre + sumaLavadoraSeptiembre + sumaOtroSeptiembre  %></td>
+                                                <td>$ <%= sumaArriendoOctubre +sumaCosinaOctubre + sumaLavadoraOctubre + sumaOtroOctubre  %></td>
+                                                <td>$ <%= sumaArriendoNoviembre +sumaCosinaNoviembre + sumaLavadoraNoviembre + sumaOtroNoviembre  %></td>
+                                                <td>$ <%= sumaArriendoDiciembre +sumaCosinaDiciembre + sumaLavadoraDiciembre+ sumaOtroDiciembre  %></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <h4>VISTA MENSUAL DE INGRESOS POR CADA HABITACIÓN</h4>
+                                    <table  id="tablaAlumnos" class="table mt-4 ">
+                                        <thead>
+                                            <tr class="tituloTabla">
+                                                <th>CONCEPTO</th>
+                                                <th>ENERO</th>
+                                                <th>FEBRERO</th>
+                                                <th>MARZO</th>
+                                                <th>ABRIL</th>
+                                                <th>MAYO</th>
+                                                <th>JUNIO</th>
+                                                <th>JULIO</th>
+                                                <th>AGOSTO</th>
+                                                <th>SEPTIEMBRE</th>
+                                                <th>OCTUBRE</th>
+                                                <th>NOVIEMBRE</th>
+                                                <th>DICIEMBRE</th>
+    
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>KR19 GARAJE</td>
+                                                <td>$  <%= sumaKr19garajeEnero %></td>
+                                                <td>$  <%= sumaKr19garajeFebrero %></td>
+                                                <td>$  <%= sumaKr19garajeMarzo %></td>
+                                                <td>$  <%= sumaKr19garajeAbril %></td>
+                                                <td>$  <%= sumaKr19garajeMayo %></td>
+                                                <td>$  <%= sumaKr19garajeJunio %></td>
+                                                <td>$  <%= sumaKr19garajeJulio %></td>
+                                                <td>$  <%= sumaKr19garajeAgosto %></td>
+                                                <td>$  <%= sumaKr19garajeSeptiembre %></td>
+                                                <td>$  <%= sumaKr19garajeOctubre %></td>
+                                                <td>$  <%= sumaKr19garajeNoviembre %></td>
+                                                <td>$  <%= sumaKr19garajeDiciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P1P1</td>
+                                                <td>$ <%= sumaKr19p1p1Enero %></td>
+                                                <td>$ <%= sumaKr19p1p1Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p1Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p1Abril %></td>
+                                                <td>$ <%= sumaKr19p1p1Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p1Junio %></td>
+                                                <td>$ <%= sumaKr19p1p1Julio %></td>
+                                                <td>$ <%= sumaKr19p1p1Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p1Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p1Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p1Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p1Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P1P2</td>
+                                                <td>$ <%= sumaKr19p1p2Enero %></td>
+                                                <td>$ <%= sumaKr19p1p2Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p2Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p2Abril %></td>
+                                                <td>$ <%= sumaKr19p1p2Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p2Junio %></td>
+                                                <td>$ <%= sumaKr19p1p2Julio %></td>
+                                                <td>$ <%= sumaKr19p1p2Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p2Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p2Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p2Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p2Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P1P3</td>
+                                                <td>$ <%= sumaKr19p1p3Enero %></td>
+                                                <td>$ <%= sumaKr19p1p3Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p3Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p3Abril %></td>
+                                                <td>$ <%= sumaKr19p1p3Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p3Junio %></td>
+                                                <td>$ <%= sumaKr19p1p3Julio %></td>
+                                                <td>$ <%= sumaKr19p1p3Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p3Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p3Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p3Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p3Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P1P4</td>
+                                                <td>$ <%= sumaKr19p1p4Enero %></td>
+                                                <td>$ <%= sumaKr19p1p4Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p4Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p4Abril %></td>
+                                                <td>$ <%= sumaKr19p1p4Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p4Junio %></td>
+                                                <td>$ <%= sumaKr19p1p4Julio %></td>
+                                                <td>$ <%= sumaKr19p1p4Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p4Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p4Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p4Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p4Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P1P5</td>
+                                                <td>$ <%= sumaKr19p1p5Enero %></td>
+                                                <td>$ <%= sumaKr19p1p5Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p5Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p5Abril %></td>
+                                                <td>$ <%= sumaKr19p1p5Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p5Junio %></td>
+                                                <td>$ <%= sumaKr19p1p5Julio %></td>
+                                                <td>$ <%= sumaKr19p1p5Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p5Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p5Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p5Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p5Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P1P6</td>
+                                                <td>$ <%= sumaKr19p1p6Enero %></td>
+                                                <td>$ <%= sumaKr19p1p6Febrero %></td>
+                                                <td>$ <%= sumaKr19p1p6Marzo %></td>
+                                                <td>$ <%= sumaKr19p1p6Abril %></td>
+                                                <td>$ <%= sumaKr19p1p6Mayo %></td>
+                                                <td>$ <%= sumaKr19p1p6Junio %></td>
+                                                <td>$ <%= sumaKr19p1p6Julio %></td>
+                                                <td>$ <%= sumaKr19p1p6Agosto %></td>
+                                                <td>$ <%= sumaKr19p1p6Septiembre %></td>
+                                                <td>$ <%= sumaKr19p1p6Octubre %></td>
+                                                <td>$ <%= sumaKr19p1p6Noviembre %></td>
+                                                <td>$ <%= sumaKr19p1p6Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P2P1</td>
+                                                <td>$ <%= sumaKr19p2p1Enero %></td>
+                                                <td>$ <%= sumaKr19p2p1Febrero %></td>
+                                                <td>$ <%= sumaKr19p2p1Marzo %></td>
+                                                <td>$ <%= sumaKr19p2p1Abril %></td>
+                                                <td>$ <%= sumaKr19p2p1Mayo %></td>
+                                                <td>$ <%= sumaKr19p2p1Junio %></td>
+                                                <td>$ <%= sumaKr19p2p1Julio %></td>
+                                                <td>$ <%= sumaKr19p2p1Agosto %></td>
+                                                <td>$ <%= sumaKr19p2p1Septiembre %></td>
+                                                <td>$ <%= sumaKr19p2p1Octubre %></td>
+                                                <td>$ <%= sumaKr19p2p1Noviembre %></td>
+                                                <td>$ <%= sumaKr19p2p1Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P2P2</td>
+                                                <td>$ <%= sumaKr19p2p2Enero %></td>
+                                                <td>$ <%= sumaKr19p2p2Febrero %></td>
+                                                <td>$ <%= sumaKr19p2p2Marzo %></td>
+                                                <td>$ <%= sumaKr19p2p2Abril %></td>
+                                                <td>$ <%= sumaKr19p2p2Mayo %></td>
+                                                <td>$ <%= sumaKr19p2p2Junio %></td>
+                                                <td>$ <%= sumaKr19p2p2Julio %></td>
+                                                <td>$ <%= sumaKr19p2p2Agosto %></td>
+                                                <td>$ <%= sumaKr19p2p2Septiembre %></td>
+                                                <td>$ <%= sumaKr19p2p2Octubre %></td>
+                                                <td>$ <%= sumaKr19p2p2Noviembre %></td>
+                                                <td>$ <%= sumaKr19p2p2Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P2P3</td>
+                                                <td>$ <%= sumaKr19p2p3Enero %></td>
+                                                <td>$ <%= sumaKr19p2p3Febrero %></td>
+                                                <td>$ <%= sumaKr19p2p3Marzo %></td>
+                                                <td>$ <%= sumaKr19p2p3Abril %></td>
+                                                <td>$ <%= sumaKr19p2p3Mayo %></td>
+                                                <td>$ <%= sumaKr19p2p3Junio %></td>
+                                                <td>$ <%= sumaKr19p2p3Julio %></td>
+                                                <td>$ <%= sumaKr19p2p3Agosto %></td>
+                                                <td>$ <%= sumaKr19p2p3Septiembre %></td>
+                                                <td>$ <%= sumaKr19p2p3Octubre %></td>
+                                                <td>$ <%= sumaKr19p2p3Noviembre %></td>
+                                                <td>$ <%= sumaKr19p2p3Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P3P1</td>
+                                                <td>$ <%= sumaKr19p3p1Enero %></td>
+                                                <td>$ <%= sumaKr19p3p1Febrero %></td>
+                                                <td>$ <%= sumaKr19p3p1Marzo %></td>
+                                                <td>$ <%= sumaKr19p3p1Abril %></td>
+                                                <td>$ <%= sumaKr19p3p1Mayo %></td>
+                                                <td>$ <%= sumaKr19p3p1Junio %></td>
+                                                <td>$ <%= sumaKr19p3p1Julio %></td>
+                                                <td>$ <%= sumaKr19p3p1Agosto %></td>
+                                                <td>$ <%= sumaKr19p3p1Septiembre %></td>
+                                                <td>$ <%= sumaKr19p3p1Octubre %></td>
+                                                <td>$ <%= sumaKr19p3p1Noviembre %></td>
+                                                <td>$ <%= sumaKr19p3p1Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P3P2</td>
+                                                <td>$ <%= sumaKr19p3p2Enero %></td>
+                                                <td>$ <%= sumaKr19p3p2Febrero %></td>
+                                                <td>$ <%= sumaKr19p3p2Marzo %></td>
+                                                <td>$ <%= sumaKr19p3p2Abril %></td>
+                                                <td>$ <%= sumaKr19p3p2Mayo %></td>
+                                                <td>$ <%= sumaKr19p3p2Junio %></td>
+                                                <td>$ <%= sumaKr19p3p2Julio %></td>
+                                                <td>$ <%= sumaKr19p3p2Agosto %></td>
+                                                <td>$ <%= sumaKr19p3p2Septiembre %></td>
+                                                <td>$ <%= sumaKr19p3p2Octubre %></td>
+                                                <td>$ <%= sumaKr19p3p2Noviembre %></td>
+                                                <td>$ <%= sumaKr19p3p2Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR19 P3P3</td>
+                                                <td>$ <%= sumaKr19p3p3Enero %></td>
+                                                <td>$ <%= sumaKr19p3p3Febrero %></td>
+                                                <td>$ <%= sumaKr19p3p3Marzo %></td>
+                                                <td>$ <%= sumaKr19p3p3Abril %></td>
+                                                <td>$ <%= sumaKr19p3p3Mayo %></td>
+                                                <td>$ <%= sumaKr19p3p3Junio %></td>
+                                                <td>$ <%= sumaKr19p3p3Julio %></td>
+                                                <td>$ <%= sumaKr19p3p3Agosto %></td>
+                                                <td>$ <%= sumaKr19p3p3Septiembre %></td>
+                                                <td>$ <%= sumaKr19p3p3Octubre %></td>
+                                                <td>$ <%= sumaKr19p3p3Noviembre %></td>
+                                                <td>$ <%= sumaKr19p3p3Diciembre %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR19 P3P4</td>
+                                                <td>$ <%= sumaKr19p3p4Enero %></td>
+                                                <td>$ <%= sumaKr19p3p4Febrero %></td>
+                                                <td>$ <%= sumaKr19p3p4Marzo %></td>
+                                                <td>$ <%= sumaKr19p3p4Abril %></td>
+                                                <td>$ <%= sumaKr19p3p4Mayo %></td>
+                                                <td>$ <%= sumaKr19p3p4Junio %></td>
+                                                <td>$ <%= sumaKr19p3p4Julio %></td>
+                                                <td>$ <%= sumaKr19p3p4Agosto %></td>
+                                                <td>$ <%= sumaKr19p3p4Septiembre %></td>
+                                                <td>$ <%= sumaKr19p3p4Octubre %></td>
+                                                <td>$ <%= sumaKr19p3p4Noviembre %></td>
+                                                <td>$ <%= sumaKr19p3p4Diciembre %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR21 G2</td>
+                                                <td>$ <%= sumaKr21g2Enero   %></td>
+                                                <td>$ <%= sumaKr21g2Febrero %></td>
+                                                <td>$ <%= sumaKr21g2Marzo   %></td>
+                                                <td>$ <%= sumaKr21g2Abril   %></td>
+                                                <td>$ <%= sumaKr21g2Mayo   %></td>
+                                                <td>$ <%= sumaKr21g2Junio   %></td>
+                                                <td>$ <%= sumaKr21g2Julio   %></td>
+                                                <td>$ <%= sumaKr21g2Agosto   %></td>
+                                                <td>$ <%= sumaKr21g2Septiembre   %></td>
+                                                <td>$ <%= sumaKr21g2Octubre   %></td>
+                                                <td>$ <%= sumaKr21g2Noviembre   %></td>
+                                                <td>$ <%= sumaKr21g2Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 G3</td>
+                                                <td>$ <%= sumaKr21g3Enero   %></td>
+                                                <td>$ <%= sumaKr21g3Febrero %></td>
+                                                <td>$ <%= sumaKr21g3Marzo   %></td>
+                                                <td>$ <%= sumaKr21g3Abril   %></td>
+                                                <td>$ <%= sumaKr21g3Mayo   %></td>
+                                                <td>$ <%= sumaKr21g3Junio   %></td>
+                                                <td>$ <%= sumaKr21g3Julio   %></td>
+                                                <td>$ <%= sumaKr21g3Agosto   %></td>
+                                                <td>$ <%= sumaKr21g3Septiembre   %></td>
+                                                <td>$ <%= sumaKr21g3Octubre   %></td>
+                                                <td>$ <%= sumaKr21g3Noviembre   %></td>
+                                                <td>$ <%= sumaKr21g3Diciembre   %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR21 APARTA.</td>
+                                                <td>$ <%= sumaKr21apartaestudioEnero   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioFebrero %></td>
+                                                <td>$ <%= sumaKr21apartaestudioMarzo   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioAbril   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioMayo   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioJunio   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioJulio   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioAgosto   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioSeptiembre   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioOctubre  %></td>
+                                                <td>$ <%= sumaKr21apartaestudioNoviembre   %></td>
+                                                <td>$ <%= sumaKr21apartaestudioDiciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P2P1</td>
+                                                <td>$ <%= sumaKr21p2p1Enero   %></td>
+                                                <td>$ <%= sumaKr21p2p1Febrero %></td>
+                                                <td>$ <%= sumaKr21p2p1Marzo   %></td>
+                                                <td>$ <%= sumaKr21p2p1Abril   %></td>
+                                                <td>$ <%= sumaKr21p2p1Mayo   %></td>
+                                                <td>$ <%= sumaKr21p2p1Junio   %></td>
+                                                <td>$ <%= sumaKr21p2p1Julio   %></td>
+                                                <td>$ <%= sumaKr21p2p1Agosto   %></td>
+                                                <td>$ <%= sumaKr21p2p1Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p2p1Octubre   %></td>
+                                                <td>$ <%= sumaKr21p2p1Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p2p1Diciembre   %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR21 P2P2</td>
+                                                <td>$ <%= sumaKr21p2p2Enero   %></td>
+                                                <td>$ <%= sumaKr21p2p2Febrero %></td>
+                                                <td>$ <%= sumaKr21p2p2Marzo   %></td>
+                                                <td>$ <%= sumaKr21p2p2Abril   %></td>
+                                                <td>$ <%= sumaKr21p2p2Mayo   %></td>
+                                                <td>$ <%= sumaKr21p2p2Junio   %></td>
+                                                <td>$ <%= sumaKr21p2p2Julio   %></td>
+                                                <td>$ <%= sumaKr21p2p2Agosto   %></td>
+                                                <td>$ <%= sumaKr21p2p2Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p2p2Octubre   %></td>
+                                                <td>$ <%= sumaKr21p2p2Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p2p2Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P2P3</td>
+                                                <td>$ <%= sumaKr21p2p3Enero   %></td>
+                                                <td>$ <%= sumaKr21p2p3Febrero %></td>
+                                                <td>$ <%= sumaKr21p2p3Marzo   %></td>
+                                                <td>$ <%= sumaKr21p2p3Abril   %></td>
+                                                <td>$ <%= sumaKr21p2p3Mayo   %></td>
+                                                <td>$ <%= sumaKr21p2p3Junio   %></td>
+                                                <td>$ <%= sumaKr21p2p3Julio   %></td>
+                                                <td>$ <%= sumaKr21p2p3Agosto   %></td>
+                                                <td>$ <%= sumaKr21p2p3Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p2p3Octubre   %></td>
+                                                <td>$ <%= sumaKr21p2p3Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p2p3Diciembre   %></td>
+                                            </tr>
+                                            <tr >
+                                                <td>KR21 P2P4</td>
+                                                <td>$ <%= sumaKr21p2p4Enero   %></td>
+                                                <td>$ <%= sumaKr21p2p4Febrero %></td>
+                                                <td>$ <%= sumaKr21p2p4Marzo   %></td>
+                                                <td>$ <%= sumaKr21p2p4Abril   %></td>
+                                                <td>$ <%= sumaKr21p2p4Mayo   %></td>
+                                                <td>$ <%= sumaKr21p2p4Junio   %></td>
+                                                <td>$ <%= sumaKr21p2p4Julio   %></td>
+                                                <td>$ <%= sumaKr21p2p4Agosto   %></td>
+                                                <td>$ <%= sumaKr21p2p4Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p2p4Octubre   %></td>
+                                                <td>$ <%= sumaKr21p2p4Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p2p4Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P3P1</td>
+                                                <td>$ <%= sumaKr21p3p1Enero   %></td>
+                                                <td>$ <%= sumaKr21p3p1Febrero %></td>
+                                                <td>$ <%= sumaKr21p3p1Marzo   %></td>
+                                                <td>$ <%= sumaKr21p3p1Abril   %></td>
+                                                <td>$ <%= sumaKr21p3p1Mayo   %></td>
+                                                <td>$ <%= sumaKr21p3p1Junio   %></td>
+                                                <td>$ <%= sumaKr21p3p1Julio   %></td>
+                                                <td>$ <%= sumaKr21p3p1Agosto   %></td>
+                                                <td>$ <%= sumaKr21p3p1Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p3p1Octubre   %></td>
+                                                <td>$<%= sumaKr21p3p1Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p3p1Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P3P2</td>
+                                                <td>$ <%= sumaKr21p3p2Enero   %></td>
+                                                <td>$ <%= sumaKr21p3p2Febrero %></td>
+                                                <td>$ <%= sumaKr21p3p2Marzo   %></td>
+                                                <td>$ <%= sumaKr21p3p2Abril   %></td>
+                                                <td>$ <%= sumaKr21p3p2Mayo   %></td>
+                                                <td>$ <%= sumaKr21p3p2Junio   %></td>
+                                                <td>$ <%= sumaKr21p3p2Julio   %></td>
+                                                <td>$ <%= sumaKr21p3p2Agosto   %></td>
+                                                <td>$ <%= sumaKr21p3p2Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p3p2Octubre   %></td>
+                                                <td>$ <%= sumaKr21p3p2Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p3p2Diciembre   %></td>
+                                            </tr>
+                                            <tr  class="color1">
+                                                <td>KR21 P3P3</td>
+                                                <td>$ <%= sumaKr21p3p3Enero   %></td>
+                                                <td>$ <%= sumaKr21p3p3Febrero %></td>
+                                                <td>$ <%= sumaKr21p3p3Marzo   %></td>
+                                                <td>$ <%= sumaKr21p3p3Abril   %></td>
+                                                <td>$ <%= sumaKr21p3p3Mayo   %></td>
+                                                <td>$ <%= sumaKr21p3p3Junio   %></td>
+                                                <td>$ <%= sumaKr21p3p3Julio   %></td>
+                                                <td>$ <%= sumaKr21p3p3Agosto   %></td>
+                                                <td>$ <%= sumaKr21p3p3Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p3p3Octubre   %></td>
+                                                <td>$ <%= sumaKr21p3p3Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p3p3Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P3P4</td>
+                                                <td>$ <%= sumaKr21p3p4Enero   %></td>
+                                                <td>$ <%= sumaKr21p3p4Febrero %></td>
+                                                <td>$ <%= sumaKr21p3p4Marzo   %></td>
+                                                <td>$ <%= sumaKr21p3p4Abril   %></td>
+                                                <td>$ <%= sumaKr21p3p4Mayo   %></td>
+                                                <td>$ <%= sumaKr21p3p4Junio   %></td>
+                                                <td>$ <%= sumaKr21p3p4Julio   %></td>
+                                                <td>$ <%= sumaKr21p3p4Agosto   %></td>
+                                                <td>$ <%= sumaKr21p3p4Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p3p4Octubre   %></td>
+                                                <td>$ <%= sumaKr21p3p4Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p3p4Diciembre   %></td>
+                                            </tr>
+                                            <tr  class="color1">
+                                                <td>KR21 P3P5</td>
+                                                <td>$ <%= sumaKr21p3p5Enero   %></td>
+                                                <td>$ <%= sumaKr21p3p5Febrero %></td>
+                                                <td>$ <%= sumaKr21p3p5Marzo   %></td>
+                                                <td>$ <%= sumaKr21p3p5Abril   %></td>
+                                                <td>$ <%= sumaKr21p3p5Mayo   %></td>
+                                                <td>$ <%= sumaKr21p3p5Junio   %></td>
+                                                <td>$ <%= sumaKr21p3p5Julio   %></td>
+                                                <td>$ <%= sumaKr21p3p5Agosto   %></td>
+                                                <td>$ <%= sumaKr21p3p5Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p3p5Octubre   %></td>
+                                                <td>$ <%= sumaKr21p3p5Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p3p5Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P4P1</td>
+                                                <td>$ <%= sumaKr21p4p1Enero   %></td>
+                                                <td>$ <%= sumaKr21p4p1Febrero %></td>
+                                                <td>$ <%= sumaKr21p4p1Marzo   %></td>
+                                                <td>$ <%= sumaKr21p4p1Abril   %></td>
+                                                <td>$ <%= sumaKr21p4p1Mayo   %></td>
+                                                <td>$ <%= sumaKr21p4p1Junio   %></td>
+                                                <td>$ <%= sumaKr21p4p1Julio   %></td>
+                                                <td>$ <%= sumaKr21p4p1Agosto   %></td>
+                                                <td>$ <%= sumaKr21p4p1Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p4p1Octubre   %></td>
+                                                <td>$ <%= sumaKr21p4p1Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p4p1Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P4P2</td>
+                                                <td>$ <%= sumaKr21p4p2Enero   %></td>
+                                                <td>$ <%= sumaKr21p4p2Febrero %></td>
+                                                <td>$ <%= sumaKr21p4p2Marzo   %></td>
+                                                <td>$ <%= sumaKr21p4p2Abril   %></td>
+                                                <td>$ <%= sumaKr21p4p2Mayo   %></td>
+                                                <td>$ <%= sumaKr21p4p2Junio   %></td>
+                                                <td>$ <%= sumaKr21p4p2Julio   %></td>
+                                                <td>$ <%= sumaKr21p4p2Agosto   %></td>
+                                                <td>$ <%= sumaKr21p4p2Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p4p2Octubre   %></td>
+                                                <td>$ <%= sumaKr21p4p2Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p4p2Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P4P3</td>
+                                                <td>$ <%= sumaKr21p4p3Enero   %></td>
+                                                <td>$ <%= sumaKr21p4p3Febrero %></td>
+                                                <td>$ <%= sumaKr21p4p3Marzo   %></td>
+                                                <td>$ <%= sumaKr21p4p3Abril   %></td>
+                                                <td>$ <%= sumaKr21p4p3Mayo   %></td>
+                                                <td>$ <%= sumaKr21p4p3Junio   %></td>
+                                                <td>$ <%= sumaKr21p4p3Julio   %></td>
+                                                <td>$ <%= sumaKr21p4p3Agosto   %></td>
+                                                <td>$ <%= sumaKr21p4p3Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p4p3Octubre   %></td>
+                                                <td>$ <%= sumaKr21p4p3Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p4p3Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P4P4</td>
+                                                <td>$ <%= sumaKr21p4p4Enero   %></td>
+                                                <td>$ <%= sumaKr21p4p4Febrero %></td>
+                                                <td>$ <%= sumaKr21p4p4Marzo   %></td>
+                                                <td>$ <%= sumaKr21p4p4Abril   %></td>
+                                                <td>$ <%= sumaKr21p4p4Mayo   %></td>
+                                                <td>$ <%= sumaKr21p4p4Junio   %></td>
+                                                <td>$ <%= sumaKr21p4p4Julio   %></td>
+                                                <td>$ <%= sumaKr21p4p4Agosto   %></td>
+                                                <td>$ <%= sumaKr21p4p4Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p4p4Octubre   %></td>
+                                                <td>$ <%= sumaKr21p4p4Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p4p4Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P4P5</td>
+                                                <td>$ <%= sumaKr21p4p5Enero   %></td>
+                                                <td>$ <%= sumaKr21p4p5Febrero %></td>
+                                                <td>$ <%= sumaKr21p4p5Marzo   %></td>
+                                                <td>$ <%= sumaKr21p4p5Abril   %></td>
+                                                <td>$ <%= sumaKr21p4p5Mayo   %></td>
+                                                <td>$ <%= sumaKr21p4p5Junio   %></td>
+                                                <td>$ <%= sumaKr21p4p5Julio   %></td>
+                                                <td>$ <%= sumaKr21p4p5Agosto   %></td>
+                                                <td>$ <%= sumaKr21p4p5Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p4p5Octubre   %></td>
+                                                <td>$ <%= sumaKr21p4p5Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p4p5Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P5P1</td>
+                                                <td>$ <%= sumaKr21p5p1Enero   %></td>
+                                                <td>$ <%= sumaKr21p5p1Febrero %></td>
+                                                <td>$ <%= sumaKr21p5p1Marzo   %></td>
+                                                <td>$ <%= sumaKr21p5p1Abril   %></td>
+                                                <td>$ <%= sumaKr21p5p1Mayo   %></td>
+                                                <td>$ <%= sumaKr21p5p1Junio   %></td>
+                                                <td>$ <%= sumaKr21p5p1Julio   %></td>
+                                                <td>$ <%= sumaKr21p5p1Agosto   %></td>
+                                                <td>$ <%= sumaKr21p5p1Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p5p1Octubre   %></td>
+                                                <td>$ <%= sumaKr21p5p1Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p5p1Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P5P2</td>
+                                                <td>$ <%= sumaKr21p5p2Enero   %></td>
+                                                <td>$ <%= sumaKr21p5p2Febrero %></td>
+                                                <td>$ <%= sumaKr21p5p2Marzo   %></td>
+                                                <td>$ <%= sumaKr21p5p2Abril   %></td>
+                                                <td>$ <%= sumaKr21p5p2Mayo   %></td>
+                                                <td>$ <%= sumaKr21p5p2Junio   %></td>
+                                                <td>$ <%= sumaKr21p5p2Julio   %></td>
+                                                <td>$ <%= sumaKr21p5p2Agosto   %></td>
+                                                <td>$ <%= sumaKr21p5p2Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p5p2Octubre   %></td>
+                                                <td>$ <%= sumaKr21p5p2Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p5p2Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P5P3</td>
+                                                <td>$ <%= sumaKr21p5p3Enero   %></td>
+                                                <td>$ <%= sumaKr21p5p3Febrero %></td>
+                                                <td>$ <%= sumaKr21p5p3Marzo   %></td>
+                                                <td>$ <%= sumaKr21p5p3Abril   %></td>
+                                                <td>$ <%= sumaKr21p5p3Mayo   %></td>
+                                                <td>$ <%= sumaKr21p5p3Junio   %></td>
+                                                <td>$ <%= sumaKr21p5p3Julio   %></td>
+                                                <td>$ <%= sumaKr21p5p3Agosto   %></td>
+                                                <td>$ <%= sumaKr21p5p3Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p5p3Octubre   %></td>
+                                                <td>$ <%= sumaKr21p5p3Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p5p3Diciembre   %></td>
+                                            </tr>
+                                            <tr>
+                                                <td>KR21 P5P4</td>
+                                                <td>$ <%= sumaKr21p5p4Enero   %></td>
+                                                <td>$ <%= sumaKr21p5p4Febrero %></td>
+                                                <td>$ <%= sumaKr21p5p4Marzo   %></td>
+                                                <td>$ <%= sumaKr21p5p4Abril   %></td>
+                                                <td>$ <%= sumaKr21p5p4Mayo   %></td>
+                                                <td>$ <%= sumaKr21p5p4Junio   %></td>
+                                                <td>$ <%= sumaKr21p5p4Julio   %></td>
+                                                <td>$ <%= sumaKr21p5p4Agosto   %></td>
+                                                <td>$ <%= sumaKr21p5p4Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p5p4Octubre   %></td>
+                                                <td>$ <%= sumaKr21p5p4Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p5p4Diciembre   %></td>
+                                            </tr>
+                                            <tr class="color1">
+                                                <td>KR21 P5P5</td>
+                                                <td>$ <%= sumaKr21p5p5Enero   %></td>
+                                                <td>$ <%= sumaKr21p5p5Febrero %></td>
+                                                <td>$ <%= sumaKr21p5p5Marzo   %></td>
+                                                <td>$ <%= sumaKr21p5p5Abril   %></td>
+                                                <td>$ <%= sumaKr21p5p5Mayo   %></td>
+                                                <td>$ <%= sumaKr21p5p5Junio   %></td>
+                                                <td>$ <%= sumaKr21p5p5Julio   %></td>
+                                                <td>$ <%= sumaKr21p5p5Agosto   %></td>
+                                                <td>$ <%= sumaKr21p5p5Septiembre   %></td>
+                                                <td>$ <%= sumaKr21p5p5Octubre   %></td>
+                                                <td>$ <%= sumaKr21p5p5Noviembre   %></td>
+                                                <td>$ <%= sumaKr21p5p5Diciembre   %></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+               
+                    </div>      
+                    
+            </div>
+            <div class="item3">
+                 <!-- para el menu lateral -->
+                <div class="navigation">
+                    <h4 class="titulo tituloMenu">MENU</h4>
+                    <ul>
+                        <div class="espacioTituloMenu">
+                            <li  class="list active">
+                                <b></b>
+                                <b></b>
+                                <a href="/">
+                                <span class="icon"></span>
+                            <span class="title "><h6>INGRE.</h6></span>
+                                </a>
+                            </li>
+                            <li  class="list">
+                                <b></b>
+                                <b></b>
+                                <a href="/mostrarGananciasExternas">
+                                <span class="icon"></span>
+                                <span class="title"><h6>GAN EXTER</h6></span>
+                                </a>
+                            </li>
+                            <li  class="list">
+                                <b></b>
+                                <b></b>
+                                <a href="/mostrarDinerosSalida">
+                                <span class="icon"></span>
+                                <span class="title"><h6>DINER SAL</h6></span>
+                                </a>
+                            </li>
+                            <li>
+                                <span class="title"><h6>------------</h6></span>
+                            </li>
+                            <li  class="list">
+                                <b></b>
+                                <b></b>
+                                <a href="/promedios">
+                                <span class="icon"></span>
+                                <span class="title"><h7>PROME</h7></span>
+                                </a>
+                            </li>
+                            <li  class="list active">
+                                <b></b>
+                                <b></b>
+                                <a href="/vistaMensual">
+                                <span class="icon"></span>
+                                <span class="title"><h7>VISTA MEN</h7></span>
+                                </a>
+                            </li>
+                        </div>
+                        
+                    </ul>
+                </div>
+            
+                <div class="toggle">
+                </div>
+                
+            </div>
+        </div>
+
+        
+
+        
+        
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="js/code.js"></script>
+        <script src="../index.js"></script>
+
+        <!-- Esto es del menu de lateral-->
+        <script>
+            let menuToggle = document.querySelector('.toggle');
+            let navigation = document.querySelector('.navigation');
+            menuToggle.onclick = function(){
+                menuToggle.classList.toggle('active');
+                navigation.classList.toggle('active');
+            }
+    
+            let list = document.querySelectorAll('.list');
+            for(let i=0; i<list.length; i++){
+                list[i].onclick = function(){
+                    let j = 0;
+                    while(j < list.length){
+                        list[j++].className = 'list';
+                    }
+                    list[i].className = 'list active';
+                }
+            }
+        </script>
+        
+      
+        
+    </body>
+</html>
